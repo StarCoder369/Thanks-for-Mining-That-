@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -18,7 +20,15 @@ public class Player : MonoBehaviour
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
         Vector2 direction = mouseWorldPos - rb.position;
-        rb.linearVelocity = direction.normalized * speed;
+
+        if (Vector2.Distance(mouseWorldPos, transform.position) > 2f)
+        {
+            rb.linearVelocity = direction.normalized * speed;
+        }
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     public void Die()
