@@ -8,13 +8,28 @@ public class Player : MonoBehaviour
     public float acceleration = 25f;
     public float deadZone = 0.25f;
     public float maxDistance = 5f;
-    public float turnSpeed = 180f;
+    public float turnSpeed = 350f;
+    public float keyboardTurnSpeed = 220f;
+    public float fuel;
+    public float spinSpeed;
 
     [Header("Input Switching")]
     public float mouseMoveThreshold = 1f;
 
+    [Header("Other Stuff")]
+    public GameObject spinParent;
+    public float orbitStrength = 50f;
+    public float tangentialForce = 30f;
+    public float radialDamping = 5f;
+    float orbitRadius;
+
     private Rigidbody2D rb;
     private Vector2 lastMousePos;
+    private Vector2 mouseWorldPos;
+
+    private bool spinning;
+    private GameObject instantiatedSpinParent;
+    private Rigidbody2D spinParentRb;
 
     private enum InputMode
     {
@@ -32,15 +47,45 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.linearDamping = 4f;
 
-        if (Mouse.current != null) lastMousePos = Mouse.current.position.ReadValue();
+        if (Mouse.current != null)
+            lastMousePos = Mouse.current.position.ReadValue();
+    }
+
+    private void Update()
+    {
+        bool spinInput =
+            (Keyboard.current != null && Keyboard.current.spaceKey.isPressed) ||
+            (Mouse.current != null && Mouse.current.leftButton.isPressed);
+
+        if (!spinning && spinInput && fuel > 0f)
+        {
+            StartSpinning();
+        }
+        else if (spinning && !spinInput)
+        {
+            StopSpinning();
+        }
     }
 
     private void FixedUpdate()
     {
         UpdateInputMode();
 
-        if (currentMode == InputMode.Mouse) MouseMovement();
-        else KeyboardMovement();
+        if (!spinning)
+        {
+            if (currentMode == InputMode.Mouse)
+                MouseMovement();
+            else
+                KeyboardMovement();
+        }
+
+        if (spinning && fuel > 0f)
+        {
+            ContinueSpinning();
+
+            // Optional fuel drain
+            // fuel -= Time.fixedDeltaTime;
+        }
     }
 
     private void UpdateInputMode()
@@ -64,11 +109,13 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Mouse.current == null) return;
+        if (Mouse.current == null)
+            return;
 
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
-        if ((mousePos - lastMousePos).sqrMagnitude > mouseMoveThreshold * mouseMoveThreshold)
+        if ((mousePos - lastMousePos).sqrMagnitude >
+            mouseMoveThreshold * mouseMoveThreshold)
         {
             currentMode = InputMode.Mouse;
         }
@@ -78,10 +125,11 @@ public class Player : MonoBehaviour
 
     private void MouseMovement()
     {
-        if (Mouse.current == null) return;
+        if (Mouse.current == null)
+            return;
 
         Vector2 mousePos = Mouse.current.position.ReadValue();
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
 
         Vector2 toMouse = mouseWorldPos - rb.position;
         float distance = toMouse.magnitude;
@@ -89,6 +137,7 @@ public class Player : MonoBehaviour
         if (distance > 0.001f)
         {
             float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg;
+
             float newAngle = Mathf.MoveTowardsAngle(
                 rb.rotation,
                 angle,
@@ -102,42 +151,107 @@ public class Player : MonoBehaviour
             Vector2 direction = toMouse.normalized;
             float strength = Mathf.InverseLerp(deadZone, maxDistance, distance);
 
-            rb.AddForce(direction * (acceleration * strength), ForceMode2D.Force);
+            rb.AddForce(direction * acceleration * strength, ForceMode2D.Force);
 
             if (rb.linearVelocity.magnitude > maxSpeed)
-            {
-                rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-            }
+                rb.linearVelocity =
+                    rb.linearVelocity.normalized * maxSpeed;
         }
     }
 
     private void KeyboardMovement()
     {
-        if (Keyboard.current == null) return;
+        if (Keyboard.current == null)
+            return;
 
         float turnInput = 0f;
         float moveInput = 0f;
 
-        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed) turnInput += 1f;
-        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) turnInput -= 1f;
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+            turnInput += 1f;
 
-        if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed) moveInput += 1f;
-        if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed) moveInput -= 1f;
+        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+            turnInput -= 1f;
+
+        if (Keyboard.current.wKey.isPressed || Keyboard.current.upArrowKey.isPressed)
+            moveInput += 1f;
+
+        if (Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed)
+            moveInput -= 1f;
 
         if (Mathf.Abs(turnInput) > 0.01f)
         {
-            rb.MoveRotation(rb.rotation + turnInput * turnSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(
+                rb.rotation +
+                turnInput * keyboardTurnSpeed * Time.fixedDeltaTime);
         }
 
         if (Mathf.Abs(moveInput) > 0.01f)
         {
-            rb.AddForce((Vector2)transform.right * moveInput * acceleration, ForceMode2D.Force);
+            rb.AddForce(
+                (Vector2)transform.right * moveInput * acceleration,
+                ForceMode2D.Force);
 
             if (rb.linearVelocity.magnitude > maxSpeed)
-            {
-                rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
-            }
+                rb.linearVelocity =
+                    rb.linearVelocity.normalized * maxSpeed;
         }
+    }
+
+    private void StartSpinning()
+    {
+        spinning = true;
+
+        instantiatedSpinParent =
+            Instantiate(spinParent, mouseWorldPos, Quaternion.identity);
+
+        orbitRadius = Vector2.Distance(
+            rb.position,
+            instantiatedSpinParent.transform.position);
+    }
+
+    private void ContinueSpinning()
+    {
+        if (instantiatedSpinParent == null)
+            return;
+
+        Vector2 center = instantiatedSpinParent.transform.position;
+
+        Vector2 offset = rb.position - center;
+        float distance = offset.magnitude;
+
+        if (distance < 0.001f)
+            return;
+
+        Vector2 radialDir = offset.normalized;
+        Vector2 tangentDir = new Vector2(-radialDir.y, radialDir.x);
+
+        float radiusError = distance - orbitRadius;
+
+        rb.AddForce(
+            -radialDir * radiusError * orbitStrength,
+            ForceMode2D.Force);
+
+        float radialVelocity =
+            Vector2.Dot(rb.linearVelocity, radialDir);
+
+        rb.AddForce(
+            -radialDir * radialVelocity * radialDamping,
+            ForceMode2D.Force);
+
+        rb.AddForce(
+            tangentDir * tangentialForce,
+            ForceMode2D.Force);
+    }
+
+    private void StopSpinning()
+    {
+        spinning = false;
+
+        if (instantiatedSpinParent != null)
+            Destroy(instantiatedSpinParent);
+
+        instantiatedSpinParent = null;
     }
 
     public void Die()

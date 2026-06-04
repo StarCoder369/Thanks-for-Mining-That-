@@ -5,6 +5,7 @@ public class Asteroid : MonoBehaviour
     public OreData oreData;
 
     public GameObject explosion;
+    public GameObject hitEffect;
 
     public int minAmountToDrop;
     public int maxAmountToDrop;
