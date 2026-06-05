@@ -144,7 +144,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   target: {fileID: 0}
   Explosion: {fileID: 8225239767095087357, guid: 298195dfa4fcb42a18b8442f04cbbbfb, type: 3}
-  speed: 10
+  maxHealth: 2
+  dmg: 2
+  thrust: 15
+  maxSpeed: 30
+  turnSpeed: 180
 --- !u!50 &1151774494408016608
 Rigidbody2D:
   serializedVersion: 5

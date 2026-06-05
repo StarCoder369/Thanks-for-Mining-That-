@@ -3,45 +3,49 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    public List<GameObject> levelOneAsteroids;
-    public List<GameObject> levelTwoAsteroids;
-    public List<GameObject> levelThreeAsteroids;
+    public List<GameObject> asteroids;
 
-    public List<Transform> levelOneSpawnPoints;
-    public List<Transform> levelTwoSpawnPoints;
-    public List<Transform> levelThreeSpawnPoints;
-
+    public List<Transform> spawnPoints;
     //Should be from 0 - 100, 50 being 50% chance, 100 being 100%, etc...
-    public float levelOneSpawnChance;
-    public float levelTwoSpawnChance;
-    public float levelThreeSpawnChance;
+    public float spawnChance;
+    public float minSize;
+    public float maxSize;
+    public float spawnDelay;
+
+    float spawnTime;
+
+    Transform player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void Update()
+    {
+        if (Time.time > spawnTime && GameManager.Instance.gameRunning)
+        {
+            spawnTime = Time.time + spawnDelay;
+            SpawnAsteroids();
+        }
+
+        if (!GameManager.Instance.gameRunning)
+        {
+            spawnTime = 0f;
+        }
+    }
 
     public void SpawnAsteroids()
     {
-        foreach (Transform spawnPoint in levelOneSpawnPoints)
+        foreach (Transform spawnPoint in spawnPoints)
         {
-            if (Random.Range(0, 100) > levelOneSpawnChance)
+            if (Random.Range(0, 100) > spawnChance && Vector2.Distance(spawnPoint.position, player.position) > 100)
             {
-                GameObject randomAsteroid = levelOneAsteroids[Random.Range(0, levelOneAsteroids.Count)];
-                Instantiate(randomAsteroid, spawnPoint.transform.position, spawnPoint.transform.rotation);
-            }
-        }
-
-        foreach (Transform spawnPoint in levelTwoSpawnPoints)
-        {
-            if (Random.Range(0, 100) > levelTwoSpawnChance)
-            {
-                GameObject randomAsteroid = levelTwoAsteroids[Random.Range(0, levelTwoAsteroids.Count)];
-                Instantiate(randomAsteroid, spawnPoint.transform.position, spawnPoint.transform.rotation);
-            }
-        }
-
-        foreach (Transform spawnPoint in levelThreeSpawnPoints)
-        {
-            if (Random.Range(0, 100) > levelThreeSpawnChance)
-            {
-                GameObject randomAsteroid = levelThreeAsteroids[Random.Range(0, levelThreeAsteroids.Count)];
-                Instantiate(randomAsteroid, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                float randomSize = Random.Range(minSize, maxSize);
+                GameObject randomAsteroid = asteroids[Random.Range(0, asteroids.Count)];
+                GameObject instantiatedAsteroid = Instantiate(randomAsteroid, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                instantiatedAsteroid.transform.localScale = new Vector2(randomSize, randomSize);
+                instantiatedAsteroid.GetComponent<Asteroid>().SetStats();
             }
         }
     }

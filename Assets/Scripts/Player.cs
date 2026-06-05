@@ -11,25 +11,13 @@ public class Player : MonoBehaviour
     public float turnSpeed = 350f;
     public float keyboardTurnSpeed = 220f;
     public float fuel;
-    public float spinSpeed;
 
     [Header("Input Switching")]
     public float mouseMoveThreshold = 1f;
 
-    [Header("Other Stuff")]
-    public GameObject spinParent;
-    public float orbitStrength = 50f;
-    public float tangentialForce = 30f;
-    public float radialDamping = 5f;
-    float orbitRadius;
-
     private Rigidbody2D rb;
     private Vector2 lastMousePos;
     private Vector2 mouseWorldPos;
-
-    private bool spinning;
-    private GameObject instantiatedSpinParent;
-    private Rigidbody2D spinParentRb;
 
     private enum InputMode
     {
@@ -49,43 +37,45 @@ public class Player : MonoBehaviour
 
         if (Mouse.current != null)
             lastMousePos = Mouse.current.position.ReadValue();
+
     }
 
     private void Update()
     {
-        bool spinInput =
-            (Keyboard.current != null && Keyboard.current.spaceKey.isPressed) ||
-            (Mouse.current != null && Mouse.current.leftButton.isPressed);
+        // bool spinInput =
+        //     (Keyboard.current != null && Keyboard.current.spaceKey.isPressed) ||
+        //     (Mouse.current != null && Mouse.current.leftButton.isPressed);
 
-        if (!spinning && spinInput && fuel > 0f)
-        {
-            StartSpinning();
-        }
-        else if (spinning && !spinInput)
-        {
-            StopSpinning();
-        }
+        // if (!spinning && spinInput && fuel > 0f)
+        // {
+        //     StartSpinning();
+        // }
+        // else if (spinning && !spinInput)
+        // {
+        //     StopSpinning();
+        // }
     }
 
     private void FixedUpdate()
     {
         UpdateInputMode();
 
-        if (!spinning)
-        {
-            if (currentMode == InputMode.Mouse)
-                MouseMovement();
-            else
-                KeyboardMovement();
-        }
+        if (currentMode == InputMode.Mouse)
+            MouseMovement();
+        else
+            KeyboardMovement();
 
-        if (spinning && fuel > 0f)
-        {
-            ContinueSpinning();
+        // if (!spinning)
+        // {
 
-            // Optional fuel drain
-            // fuel -= Time.fixedDeltaTime;
-        }
+        // }
+
+        // if (spinning && fuel > 0f)
+        // {
+        //     ContinueSpinning();
+
+        //     // fuel -= Time.fixedDeltaTime;
+        // }
     }
 
     private void UpdateInputMode()
@@ -196,62 +186,6 @@ public class Player : MonoBehaviour
                 rb.linearVelocity =
                     rb.linearVelocity.normalized * maxSpeed;
         }
-    }
-
-    private void StartSpinning()
-    {
-        spinning = true;
-
-        instantiatedSpinParent =
-            Instantiate(spinParent, mouseWorldPos, Quaternion.identity);
-
-        orbitRadius = Vector2.Distance(
-            rb.position,
-            instantiatedSpinParent.transform.position);
-    }
-
-    private void ContinueSpinning()
-    {
-        if (instantiatedSpinParent == null)
-            return;
-
-        Vector2 center = instantiatedSpinParent.transform.position;
-
-        Vector2 offset = rb.position - center;
-        float distance = offset.magnitude;
-
-        if (distance < 0.001f)
-            return;
-
-        Vector2 radialDir = offset.normalized;
-        Vector2 tangentDir = new Vector2(-radialDir.y, radialDir.x);
-
-        float radiusError = distance - orbitRadius;
-
-        rb.AddForce(
-            -radialDir * radiusError * orbitStrength,
-            ForceMode2D.Force);
-
-        float radialVelocity =
-            Vector2.Dot(rb.linearVelocity, radialDir);
-
-        rb.AddForce(
-            -radialDir * radialVelocity * radialDamping,
-            ForceMode2D.Force);
-
-        rb.AddForce(
-            tangentDir * tangentialForce,
-            ForceMode2D.Force);
-    }
-
-    private void StopSpinning()
-    {
-        spinning = false;
-
-        if (instantiatedSpinParent != null)
-            Destroy(instantiatedSpinParent);
-
-        instantiatedSpinParent = null;
     }
 
     public void Die()

@@ -12,6 +12,12 @@ public class EnemySpawner : MonoBehaviour
 
     bool canSpawn;
     float timeToSpawn;
+    GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     void Update()
     {
         if (Time.time >= timeToSpawn)
@@ -21,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (GameManager.Instance.gameRunning && canSpawn)
         {
+            timeToSpawn = Time.time + Random.Range(minSpawnTime, maxSpawnTime);
             canSpawn = false;
             SpawnEnemy();
         }
@@ -34,9 +41,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject randomEnemy = enemyBunches[Random.Range(0, enemyBunches.Count)];
-        Transform randomSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-        Instantiate(randomEnemy, randomSpawnPoint.position, Quaternion.identity);
-        timeToSpawn = Time.time + Random.Range(minSpawnTime, maxSpawnTime);
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            if (Vector2.Distance(spawnPoint.position, player.transform.position) > 100)
+            {
+                GameObject randomEnemy = enemyBunches[Random.Range(0, enemyBunches.Count)];
+                Instantiate(randomEnemy, spawnPoint.position, Quaternion.identity);
+                break;
+            }
+        }
+
     }
 }

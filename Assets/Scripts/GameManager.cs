@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public List<OreStored> oresStorage = new();
 
-    public bool gameRunning;
+    public bool gameRunning = true;
     private void Awake()
     {
         if (Instance != null && Instance != this)
