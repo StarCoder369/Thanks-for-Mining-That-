@@ -1,18 +1,33 @@
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AcquireMessageSystem : MonoBehaviour
 {
     public GameObject acquiredPanel;
+    public List<AcquiredPanel> instantiatedPanels;
+
+    public float totalTimeToDisableMessage;
     public void ItemMessage(OreData ore, int amount)
     {
-        GameObject instantiatedPanel = Instantiate(acquiredPanel, transform);
-        instantiatedPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = ore.oreName;
-        instantiatedPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = amount.ToString();
-        if (ore.oreIcon != null)
+        foreach (AcquiredPanel panel in instantiatedPanels)
         {
-            instantiatedPanel.transform.GetChild(2).GetComponent<Image>().sprite = ore.oreIcon;
+            if (panel.ore == ore)
+            {
+                panel.timeToDisable = totalTimeToDisableMessage;
+                panel.amount += amount;
+                panel.transform.SetAsFirstSibling();
+                return;
+            }
         }
+
+        GameObject instantiatedPanel = Instantiate(acquiredPanel, transform);
+        instantiatedPanel.GetComponent<AcquiredPanel>().ore = ore;
+        instantiatedPanel.GetComponent<AcquiredPanel>().amount = amount;
+        instantiatedPanel.GetComponent<AcquiredPanel>().timeToDisable = totalTimeToDisableMessage;
+        instantiatedPanels.Add(instantiatedPanel.GetComponent<AcquiredPanel>());
+        instantiatedPanel.transform.SetAsFirstSibling();
+        instantiatedPanel.GetComponent<AcquiredPanel>().UpdateFields();
     }
 }

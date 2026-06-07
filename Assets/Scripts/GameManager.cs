@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public List<OreStored> oresStorage = new();
 
     public bool gameRunning = true;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,8 +48,15 @@ public class GameManager : MonoBehaviour
         Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy enemy in enemies)
         {
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
+
+        Asteroid[] asteroids = FindObjectsByType<Asteroid>(FindObjectsSortMode.None);
+        foreach (Asteroid asteroid in asteroids)
+        {
+            Destroy(asteroid.gameObject);
+        }
+        player.movementLocked = false;
         gameRunning = true;
     }
 

@@ -15,14 +15,16 @@ public class Player : MonoBehaviour
     [Header("Input Switching")]
     public float mouseMoveThreshold = 1f;
 
+    [Header("Other stuff")]
     public float maxHealth = 5f;
+    public GameObject trailEffect;
 
     private Rigidbody2D rb;
     private Vector2 lastMousePos;
     private Vector2 mouseWorldPos;
 
     public float currentHealth;
-    bool movementLocked;
+    public bool movementLocked;
 
     private enum InputMode
     {
@@ -58,6 +60,22 @@ public class Player : MonoBehaviour
         // {
         //     StopSpinning();
         // }
+
+        if (rb.linearVelocity.magnitude > 0.1)
+        {
+            if (!trailEffect.GetComponent<ParticleSystem>().isPlaying)
+            {
+                trailEffect.GetComponent<ParticleSystem>().Play();
+            }
+
+        }
+        else
+        {
+            if (trailEffect.GetComponent<ParticleSystem>().isPlaying)
+            {
+                trailEffect.GetComponent<ParticleSystem>().Stop();
+            }
+        }
     }
 
     private void FixedUpdate()
