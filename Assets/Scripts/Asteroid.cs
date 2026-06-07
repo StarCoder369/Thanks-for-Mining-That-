@@ -10,6 +10,8 @@ public class Asteroid : MonoBehaviour
     public int minAmountToDrop;
     public int maxAmountToDrop;
 
+    public float playerDmg;
+
     [Header("Movement Values")]
     public float driftSpeed = 1f;
     public float steeringForce = 0.5f;
@@ -86,5 +88,18 @@ public class Asteroid : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Meteor"))
+        {
+            rb.AddForce(-rb.linearVelocity * 3, ForceMode2D.Impulse);
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Collided with player");
+            StartCoroutine(collision.gameObject.GetComponent<Player>().Knockback(collision.relativeVelocity));
+        }
     }
 }

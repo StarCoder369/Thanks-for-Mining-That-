@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "ThanksForMiningThat!.slnx"
+    "dotnet.defaultSolution": "Thanks-for-Mining-That-.slnx"
 }

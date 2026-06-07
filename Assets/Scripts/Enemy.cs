@@ -79,5 +79,13 @@ public class Enemy : MonoBehaviour
             if (currentHealth <= 0)
                 Die();
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Player player = collision.gameObject.GetComponent<Player>();
+
+            player.TakeDamage(dmg);
+            StartCoroutine(player.Knockback(collision.relativeVelocity));
+        }
     }
 }

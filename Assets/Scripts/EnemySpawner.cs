@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
-            if (Vector2.Distance(spawnPoint.position, player.transform.position) > 100)
+            if (Vector2.Distance(spawnPoint.position, player.transform.position) > 35f)
             {
                 GameObject randomEnemy = enemyBunches[Random.Range(0, enemyBunches.Count)];
                 Instantiate(randomEnemy, spawnPoint.position, Quaternion.identity);

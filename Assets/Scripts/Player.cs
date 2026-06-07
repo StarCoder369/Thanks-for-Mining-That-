@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,14 +11,18 @@ public class Player : MonoBehaviour
     public float maxDistance = 5f;
     public float turnSpeed = 350f;
     public float keyboardTurnSpeed = 220f;
-    public float fuel;
 
     [Header("Input Switching")]
     public float mouseMoveThreshold = 1f;
 
+    public float maxHealth = 5f;
+
     private Rigidbody2D rb;
     private Vector2 lastMousePos;
     private Vector2 mouseWorldPos;
+
+    public float currentHealth;
+    bool movementLocked;
 
     private enum InputMode
     {
@@ -29,11 +34,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
-
         rb = GetComponent<Rigidbody2D>();
         rb.linearDamping = 4f;
+        currentHealth = maxHealth;
+        movementLocked = false;
 
         if (Mouse.current != null)
             lastMousePos = Mouse.current.position.ReadValue();
@@ -136,7 +140,7 @@ public class Player : MonoBehaviour
             rb.MoveRotation(newAngle);
         }
 
-        if (distance > deadZone)
+        if (distance > deadZone && !movementLocked)
         {
             Vector2 direction = toMouse.normalized;
             float strength = Mathf.InverseLerp(deadZone, maxDistance, distance);
@@ -176,7 +180,7 @@ public class Player : MonoBehaviour
                 turnInput * keyboardTurnSpeed * Time.fixedDeltaTime);
         }
 
-        if (Mathf.Abs(moveInput) > 0.01f)
+        if (Mathf.Abs(moveInput) > 0.01f && !movementLocked)
         {
             rb.AddForce(
                 (Vector2)transform.right * moveInput * acceleration,
@@ -188,8 +192,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage(float dmg)
+    {
+        currentHealth -= dmg;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public IEnumerator Knockback(Vector2 force)
+    {
+        movementLocked = true;
+        rb.AddForce(-force, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.1f);
+        movementLocked = false;
+    }
+
     public void Die()
     {
-        Debug.Log("Player has died");
+        GameManager.Instance.PlayerDie();
     }
 }

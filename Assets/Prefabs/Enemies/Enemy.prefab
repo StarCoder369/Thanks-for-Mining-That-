@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3129400897638990207}
   - component: {fileID: 4712805079616857373}
   - component: {fileID: 1151774494408016608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   maxHealth: 2
   dmg: 2
   thrust: 15
-  maxSpeed: 30
+  maxSpeed: 25
   turnSpeed: 180
 --- !u!50 &1151774494408016608
 Rigidbody2D:

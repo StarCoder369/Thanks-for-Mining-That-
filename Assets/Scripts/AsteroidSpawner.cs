@@ -39,7 +39,7 @@ public class AsteroidSpawner : MonoBehaviour
     {
         foreach (Transform spawnPoint in spawnPoints)
         {
-            if (Random.Range(0, 100) > spawnChance && Vector2.Distance(spawnPoint.position, player.position) > 100)
+            if (Random.Range(0, 100) > spawnChance && Vector2.Distance(spawnPoint.position, player.position) > 25)
             {
                 float randomSize = Random.Range(minSize, maxSize);
                 GameObject randomAsteroid = asteroids[Random.Range(0, asteroids.Count)];
