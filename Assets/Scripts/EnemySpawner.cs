@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public List<GameObject> enemyBunches;
+    public List<ObjectPool> enemyPools;
 
     public List<Transform> spawnPoints;
 
     public float minSpawnTime;
     public float maxSpawnTime;
+
+    public int minBunchSize = 3;
+    public int maxBunchSize = 6;
+    public float spawnRadius = 2f;
 
     bool canSpawn;
     float timeToSpawn;
@@ -18,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
+
     void Update()
     {
         if (Time.time >= timeToSpawn)
@@ -45,11 +50,19 @@ public class EnemySpawner : MonoBehaviour
         {
             if (Vector2.Distance(spawnPoint.position, player.transform.position) > 35f)
             {
-                GameObject randomEnemy = enemyBunches[Random.Range(0, enemyBunches.Count)];
-                Instantiate(randomEnemy, spawnPoint.position, Quaternion.identity);
+                int bunchSize = Random.Range(minBunchSize, maxBunchSize + 1);
+                ObjectPool randomPool = enemyPools[Random.Range(0, enemyPools.Count)];
+
+                for (int i = 0; i < bunchSize; i++)
+                {
+                    GameObject enemy = randomPool.GetObject();
+
+                    Vector2 offset = Random.insideUnitCircle * spawnRadius;
+                    enemy.transform.position = (Vector2)spawnPoint.position + offset;
+                }
+
                 break;
             }
         }
-
     }
 }

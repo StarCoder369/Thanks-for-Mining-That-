@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
 
     float currentHealth;
 
+    public bool normalEnemy = true;
+
     Rigidbody2D rb;
 
     void Start()
@@ -61,11 +63,14 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        GameObject instantiatedExplosion =
-            Instantiate(Explosion, transform.position, Quaternion.identity);
+        GameObject instantiatedExplosion = Instantiate(Explosion, transform.position, Quaternion.identity);
 
-        Destroy(instantiatedExplosion, 10f);
-        Destroy(gameObject);
+        Destroy(instantiatedExplosion, 2f);
+        if (normalEnemy)
+        {
+            GameManager.Instance.normalEnemyPool.ReturnObject(gameObject);
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)

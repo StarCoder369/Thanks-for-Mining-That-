@@ -17,6 +17,9 @@ public class Asteroid : MonoBehaviour
     public float steeringForce = 0.5f;
     public float randomAngleRange = 45f;
 
+    public bool asteroid1;
+    public bool asteroid2;
+
     private Vector2 desiredVelocity;
     private Rigidbody2D rb;
 
@@ -49,7 +52,7 @@ public class Asteroid : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         float size = transform.localScale.x;
         rb.mass = size * size / 4f;
-        durability = oreData.oreDurability * size;
+        durability = oreData.oreDurability * size * 0.7f;
         currentHealth = durability;
     }
 
@@ -84,10 +87,19 @@ public class Asteroid : MonoBehaviour
 
         if (explosion != null)
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            GameObject instantiatedExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
+            Destroy(instantiatedExplosion, 5f);
         }
 
-        Destroy(gameObject);
+        if (asteroid1)
+        {
+            GameManager.Instance.normalAsteroidPool.ReturnObject(gameObject);
+        }
+        else if (asteroid2)
+        {
+            GameManager.Instance.roundAsteroidPool.ReturnObject(gameObject);
+        }
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -98,7 +110,7 @@ public class Asteroid : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collided with player");
+            collision.gameObject.GetComponent<Player>().TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.01f);
             StartCoroutine(collision.gameObject.GetComponent<Player>().Knockback(collision.relativeVelocity));
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4742055763373846413}
   - component: {fileID: 798881368050042908}
   - component: {fileID: 1760350074243649559}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Asteroid
   m_TagString: Meteor
   m_Icon: {fileID: 0}
@@ -111,9 +111,12 @@ MonoBehaviour:
   hitEffect: {fileID: 7434467506588461915, guid: 3f2d30d416b2d46898b507526eafb0a0, type: 3}
   minAmountToDrop: 1
   maxAmountToDrop: 3
+  playerDmg: 0
   driftSpeed: 75
   steeringForce: 0.5
   randomAngleRange: 45
+  asteroid1: 1
+  asteroid2: 0
 --- !u!50 &798881368050042908
 Rigidbody2D:
   serializedVersion: 5
