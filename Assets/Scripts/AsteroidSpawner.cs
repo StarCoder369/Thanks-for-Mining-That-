@@ -20,6 +20,8 @@ public class AsteroidSpawner : MonoBehaviour
 
     Transform player;
 
+    public OreData[] ores;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -80,6 +82,7 @@ public class AsteroidSpawner : MonoBehaviour
             activatedAsteroid.transform.localScale =
                 new Vector2(randomSize, randomSize);
 
+            activatedAsteroid.GetComponent<Asteroid>().oreData = ores[Random.Range(0, ores.Length)];
             activatedAsteroid.GetComponent<Asteroid>().SetStats();
         }
     }

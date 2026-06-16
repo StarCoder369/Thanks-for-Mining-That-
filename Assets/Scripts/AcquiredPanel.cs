@@ -13,6 +13,15 @@ public class AcquiredPanel : MonoBehaviour
 
     public float timeToDisable;
 
+    void Update()
+    {
+        if (timeToDisable <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+        timeToDisable -= Time.deltaTime;
+    }
+
     public void UpdateFields()
     {
         transform.GetChild(0).GetComponent<TMP_Text>().text = ore.oreName;

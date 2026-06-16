@@ -13,11 +13,12 @@ public class AcquireMessageSystem : MonoBehaviour
     {
         foreach (AcquiredPanel panel in instantiatedPanels)
         {
-            if (panel.ore == ore)
+            if (panel.ore == ore && panel.gameObject.activeSelf)
             {
                 panel.timeToDisable = totalTimeToDisableMessage;
                 panel.amount += amount;
                 panel.transform.SetAsFirstSibling();
+                panel.UpdateFields();
                 return;
             }
         }

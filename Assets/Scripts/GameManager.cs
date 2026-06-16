@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mono.Cecil;
 using UnityEngine;
 
 [System.Serializable]
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public AsteroidSpawner asteroidSpawner;
 
     public List<OreStored> oresStorage = new();
+    public List<ResourcePanel> resourcePanels = new();
 
     public ObjectPool normalAsteroidPool;
     public ObjectPool roundAsteroidPool;
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         player.currentHealth = player.maxHealth;
+        oresStorage.Clear();
+        UpdateResources();
         Time.timeScale = 1f;
         Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy enemy in enemies)
@@ -78,6 +82,8 @@ public class GameManager : MonoBehaviour
     {
         menuPanel.SetActive(true);
         gameRunning = false;
+        oresStorage.Clear();
+        UpdateResources();
         Time.timeScale = 0f;
     }
 
@@ -91,11 +97,13 @@ public class GameManager : MonoBehaviour
     public void AddItem(OreData oreToAdd, int amount)
     {
         messageSystem.ItemMessage(oreToAdd, amount);
+
         foreach (OreStored ores in oresStorage)
         {
             if (ores.ore == oreToAdd)
             {
                 ores.amountStored += amount;
+                UpdateResources();
                 return;
             }
         }
@@ -107,5 +115,60 @@ public class GameManager : MonoBehaviour
         };
 
         oresStorage.Add(oreStorageToAdd);
+
+        UpdateResources();
+    }
+
+    public void UpdateResources()
+    {
+        if (oresStorage.Count <= 0)
+        {
+            foreach (ResourcePanel panel in resourcePanels)
+            {
+                if (panel.gameObject.activeSelf)
+                {
+                    panel.gameObject.SetActive(false);
+                    panel.amount = 0;
+                    panel.ore = null;
+                    return;
+                }
+            }
+        }
+
+        foreach (OreStored oreStored in oresStorage)
+        {
+            ResourcePanel matchingPanel = null;
+
+            // Find existing panel already assigned to this ore
+            foreach (ResourcePanel panel in resourcePanels)
+            {
+                if (panel.gameObject.activeSelf && panel.ore == oreStored.ore)
+                {
+                    matchingPanel = panel;
+                    break;
+                }
+            }
+
+            // If no panel exists, grab an unused one
+            if (matchingPanel == null)
+            {
+                foreach (ResourcePanel panel in resourcePanels)
+                {
+                    if (!panel.gameObject.activeSelf)
+                    {
+                        panel.gameObject.SetActive(true);
+                        panel.ore = oreStored.ore;
+                        matchingPanel = panel;
+                        break;
+                    }
+                }
+            }
+
+            // Update amount
+            if (matchingPanel != null)
+            {
+                matchingPanel.amount = oreStored.amountStored;
+            }
+        }
     }
 }

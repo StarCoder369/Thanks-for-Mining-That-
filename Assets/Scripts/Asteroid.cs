@@ -23,6 +23,9 @@ public class Asteroid : MonoBehaviour
     private Vector2 desiredVelocity;
     private Rigidbody2D rb;
 
+    [Header("Others")]
+    public Sprite[] oreIndication;
+
     float currentHealth;
     float durability;
     float currentLifespan;
@@ -54,6 +57,20 @@ public class Asteroid : MonoBehaviour
         rb.mass = size * size / 4f;
         durability = oreData.oreDurability * size * 0.7f;
         currentHealth = durability;
+        Transform children = GetComponentInChildren<Transform>();
+
+        foreach (Transform child in children)
+        {
+            child.GetComponent<SpriteRenderer>().sprite = oreData.oreIcon;
+            float randomScale = Random.Range(0.09f, 0.12f);
+            child.localScale = new Vector2(randomScale, randomScale);
+
+            Color tempColor = child.GetComponent<SpriteRenderer>().color;
+
+            tempColor.a = Random.Range(0.2f, 0.4f);
+
+            child.GetComponent<SpriteRenderer>().color = tempColor;
+        }
     }
 
     void FixedUpdate()
@@ -106,12 +123,13 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Meteor"))
         {
-            rb.AddForce(-rb.linearVelocity * 3, ForceMode2D.Impulse);
+            rb.AddForce(collision.relativeVelocity * 7, ForceMode2D.Impulse);
+            TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.0001f * collision.gameObject.GetComponent<Rigidbody2D>().mass);
         }
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.01f);
-            StartCoroutine(collision.gameObject.GetComponent<Player>().Knockback(collision.relativeVelocity));
+            collision.gameObject.GetComponent<Player>().TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.002f);
+            collision.gameObject.GetComponent<Player>().ApplyKnockback(collision.relativeVelocity * 5);
         }
     }
 }

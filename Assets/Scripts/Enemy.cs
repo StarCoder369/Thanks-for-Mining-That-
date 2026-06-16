@@ -90,7 +90,8 @@ public class Enemy : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
 
             player.TakeDamage(dmg);
-            StartCoroutine(player.Knockback(collision.relativeVelocity));
+            player.ApplyKnockback(collision.relativeVelocity);
+            Die();
         }
     }
 }

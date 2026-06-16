@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0cf0e58a352b49d1848831cfacfd643, type: 3}
-  m_Name: Copper
+  m_Name: Iron
   m_EditorClassIdentifier: Assembly-CSharp::OreData
-  oreName: Copper
-  oreIcon: {fileID: -6521892155967134998, guid: 4e983147a912945e3a6def265de9f3fc, type: 3}
-  oreDurability: 0.7
+  oreName: Iron
+  oreIcon: {fileID: 6521576048739483930, guid: 4e983147a912945e3a6def265de9f3fc, type: 3}
+  oreDurability: 1.3

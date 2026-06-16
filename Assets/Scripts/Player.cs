@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     [Header("Other stuff")]
     public float maxHealth = 5f;
     public GameObject trailEffect;
+    public TMP_Text healthText;
 
     private Rigidbody2D rb;
     private Vector2 lastMousePos;
@@ -25,6 +27,8 @@ public class Player : MonoBehaviour
 
     public float currentHealth;
     public bool movementLocked;
+
+    private Coroutine knockbackCoroutine;
 
     private enum InputMode
     {
@@ -86,6 +90,9 @@ public class Player : MonoBehaviour
             MouseMovement();
         else
             KeyboardMovement();
+
+        string healthPercentage = (currentHealth / maxHealth * 100).ToString("F1");
+        healthText.text = $"{healthPercentage}%";
 
         // if (!spinning)
         // {
@@ -220,12 +227,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator Knockback(Vector2 force)
+    public void ApplyKnockback(Vector2 force)
+    {
+        if (knockbackCoroutine != null)
+            StopCoroutine(knockbackCoroutine);
+
+        knockbackCoroutine = StartCoroutine(Knockback(force));
+    }
+
+    private IEnumerator Knockback(Vector2 force)
     {
         movementLocked = true;
+
         rb.AddForce(-force, ForceMode2D.Impulse);
+
         yield return new WaitForSeconds(0.1f);
+
         movementLocked = false;
+        knockbackCoroutine = null;
     }
 
     public void Die()
