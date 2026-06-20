@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Meteor
-  - NPC
   - Ground
+  - Ability
   layers:
   - Default
   - TransparentFX

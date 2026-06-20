@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
         GameObject instantiatedExplosion = Instantiate(Explosion, transform.position, Quaternion.identity);
 
         Destroy(instantiatedExplosion, 2f);
+        GameManager.Instance.coins += Random.Range(1, 2);
         if (normalEnemy)
         {
             GameManager.Instance.normalEnemyPool.ReturnObject(gameObject);

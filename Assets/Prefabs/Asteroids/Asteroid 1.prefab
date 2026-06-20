@@ -570,8 +570,8 @@ MonoBehaviour:
   oreData: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
   explosion: {fileID: 7434467506588461915, guid: 3f2d30d416b2d46898b507526eafb0a0, type: 3}
   hitEffect: {fileID: 7434467506588461915, guid: 3f2d30d416b2d46898b507526eafb0a0, type: 3}
-  minAmountToDrop: 1
-  maxAmountToDrop: 3
+  minAmountToDrop: 2
+  maxAmountToDrop: 5
   playerDmg: 0
   driftSpeed: 75
   steeringForce: 0.1

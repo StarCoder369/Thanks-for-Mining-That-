@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Mono.Cecil;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public class OreStored
@@ -28,7 +28,11 @@ public class GameManager : MonoBehaviour
     public ObjectPool roundAsteroidPool;
     public ObjectPool normalEnemyPool;
 
+    public GameObject craftingPanel;
+
     public bool gameRunning = true;
+
+    public int coins;
 
     private void Awake()
     {
@@ -45,6 +49,21 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameRunning = false;
         BackToMainMenu();
+    }
+
+    void Update()
+    {
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            DisableEnableCrafting();
+        }
+    }
+
+    public void DisableEnableCrafting()
+    {
+        craftingPanel.SetActive(!craftingPanel.activeSelf);
+
+        Time.timeScale = craftingPanel.activeSelf ? 0 : 1;
     }
 
     public void Play()
@@ -74,6 +93,14 @@ public class GameManager : MonoBehaviour
                 roundAsteroidPool.ReturnObject(asteroid.gameObject);
             }
         }
+
+        GameObject[] abilities = GameObject.FindGameObjectsWithTag("Ability");
+        foreach (GameObject ability in abilities)
+        {
+            Destroy(ability);
+        }
+
+        player.GetComponent<PlayerGameInventory>().cooldown = 1.5f;
         player.movementLocked = false;
         gameRunning = true;
     }
@@ -117,6 +144,26 @@ public class GameManager : MonoBehaviour
         oresStorage.Add(oreStorageToAdd);
 
         UpdateResources();
+    }
+
+    public void RemoveItem(OreData oreToRemove, int amount)
+    {
+        foreach (OreStored ores in oresStorage)
+        {
+            if (ores.ore == oreToRemove)
+            {
+                if ((ores.amountStored -= amount) <= 0)
+                {
+                    oresStorage.Remove(ores);
+                }
+                else
+                {
+                    ores.amountStored -= amount;
+                }
+                UpdateResources();
+                return;
+            }
+        }
     }
 
     public void UpdateResources()
@@ -170,5 +217,39 @@ public class GameManager : MonoBehaviour
                 matchingPanel.amount = oreStored.amountStored;
             }
         }
+
+        for (int i = resourcePanels.Count - 1; i >= 0; i--)
+        {
+            ResourcePanel panel = resourcePanels[i];
+            bool foundMatch = false;
+
+            foreach (OreStored oreStored in oresStorage)
+            {
+                if (oreStored.ore == panel.ore)
+                {
+                    foundMatch = true;
+                    break;
+                }
+            }
+
+            if (!foundMatch)
+            {
+                resourcePanels.RemoveAt(i);
+                panel.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public int ContainsResource(OreData ore)
+    {
+        int itemCount = 0;
+        for (int i = 0; i < oresStorage.Count; i++)
+        {
+            if (oresStorage[i].ore == ore)
+            {
+                itemCount += oresStorage[i].amountStored;
+            }
+        }
+        return itemCount;
     }
 }

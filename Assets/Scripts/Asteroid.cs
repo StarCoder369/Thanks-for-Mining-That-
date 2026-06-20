@@ -102,6 +102,8 @@ public class Asteroid : MonoBehaviour
             Random.Range(minAmountToDrop, maxAmountToDrop)
         );
 
+        GameManager.Instance.coins += Random.Range(1, 2);
+
         if (explosion != null)
         {
             GameObject instantiatedExplosion = Instantiate(explosion, transform.position, Quaternion.identity);

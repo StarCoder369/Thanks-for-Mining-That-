@@ -20,10 +20,7 @@ public class FollowMouse : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
         }
-    }
 
-    void FixedUpdate()
-    {
         transform.position = mouseWorldPos;
     }
 }
