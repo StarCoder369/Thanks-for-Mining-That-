@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject deathPanel;
     public AcquireMessageSystem messageSystem;
+
+    public TMP_Text coinsAmountTxt;
 
     public Player player;
 
@@ -57,6 +60,8 @@ public class GameManager : MonoBehaviour
         {
             DisableEnableCrafting();
         }
+
+        coinsAmountTxt.text = coins.ToString();
     }
 
     public void DisableEnableCrafting()
@@ -119,6 +124,7 @@ public class GameManager : MonoBehaviour
         deathPanel.SetActive(true);
         gameRunning = false;
         Time.timeScale = 0f;
+        messageSystem.DisablePanels();
     }
 
     public void AddItem(OreData oreToAdd, int amount)
@@ -177,7 +183,6 @@ public class GameManager : MonoBehaviour
                     panel.gameObject.SetActive(false);
                     panel.amount = 0;
                     panel.ore = null;
-                    return;
                 }
             }
         }
@@ -218,9 +223,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        for (int i = resourcePanels.Count - 1; i >= 0; i--)
+        foreach (ResourcePanel panel in resourcePanels)
         {
-            ResourcePanel panel = resourcePanels[i];
             bool foundMatch = false;
 
             foreach (OreStored oreStored in oresStorage)
@@ -234,7 +238,6 @@ public class GameManager : MonoBehaviour
 
             if (!foundMatch)
             {
-                resourcePanels.RemoveAt(i);
                 panel.gameObject.SetActive(false);
             }
         }

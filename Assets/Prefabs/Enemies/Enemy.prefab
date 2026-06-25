@@ -146,9 +146,9 @@ MonoBehaviour:
   Explosion: {fileID: 8225239767095087357, guid: 298195dfa4fcb42a18b8442f04cbbbfb, type: 3}
   maxHealth: 2
   dmg: 0.5
-  thrust: 13
+  thrust: 8
   maxSpeed: 20
-  turnSpeed: 100
+  turnSpeed: 250
   normalEnemy: 1
 --- !u!50 &1151774494408016608
 Rigidbody2D:

@@ -6,6 +6,8 @@ public class ToolData : ScriptableObject
 {
     public string toolName;
 
+    public string description;
+
     [System.Serializable]
     public class OreCost
     {
@@ -16,6 +18,7 @@ public class ToolData : ScriptableObject
     public int amountCrafted;
 
     public List<OreCost> cost;
+    public int coinCost;
 
     public GameObject toolPrefab;
 

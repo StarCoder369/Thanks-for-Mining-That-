@@ -27,18 +27,34 @@ public class CraftingPanel : MonoBehaviour
         switch (slotNum)
         {
             case 1:
+                if (inventory.tool1 == null)
+                {
+                    return;
+                }
                 cost = inventory.tool1.cost;
                 tool = inventory.tool1;
                 break;
             case 2:
+                if (inventory.tool2 == null)
+                {
+                    return;
+                }
                 cost = inventory.tool2.cost;
                 tool = inventory.tool2;
                 break;
             case 3:
+                if (inventory.tool3 == null)
+                {
+                    return;
+                }
                 cost = inventory.tool3.cost;
                 tool = inventory.tool3;
                 break;
             case 4:
+                if (inventory.tool4 == null)
+                {
+                    return;
+                }
                 cost = inventory.tool4.cost;
                 tool = inventory.tool4;
                 break;

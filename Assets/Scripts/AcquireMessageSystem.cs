@@ -31,4 +31,12 @@ public class AcquireMessageSystem : MonoBehaviour
         instantiatedPanel.transform.SetAsFirstSibling();
         instantiatedPanel.GetComponent<AcquiredPanel>().UpdateFields();
     }
+
+    public void DisablePanels()
+    {
+        foreach (AcquiredPanel panel in instantiatedPanels)
+        {
+            panel.timeToDisable = 0f;
+        }
+    }
 }

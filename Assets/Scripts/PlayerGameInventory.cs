@@ -144,14 +144,29 @@ public class PlayerGameInventory : MonoBehaviour
 
     public void UpdateIcons()
     {
-        slot1.sprite = tool1.icon;
-        slot1.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool1Amount}";
-        slot2.sprite = tool2.icon;
-        slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool2Amount}";
-        slot3.sprite = tool3.icon;
-        slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool3Amount}";
-        slot4.sprite = tool4.icon;
-        slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool4Amount}";
+        if (tool1 != null)
+        {
+            slot1.sprite = tool1.icon;
+            slot1.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool1Amount}";
+        }
+
+        if (tool2 != null)
+        {
+            slot2.sprite = tool2.icon;
+            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool2Amount}";
+        }
+
+        if (tool3 != null)
+        {
+            slot3.sprite = tool3.icon;
+            slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool3Amount}";
+        }
+
+        if (tool4 != null)
+        {
+            slot4.sprite = tool4.icon;
+            slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool4Amount}";
+        }
     }
 
     public void StartShoot()
