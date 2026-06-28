@@ -215,7 +215,7 @@ public class PlayerGameInventory : MonoBehaviour
 
         if (instantiatedModule != null)
         {
-            instantiatedModule.GetComponent<Rigidbody2D>().AddForce(shootPoint.transform.right * 50, ForceMode2D.Impulse);
+            instantiatedModule.GetComponent<Rigidbody2D>().AddForce(shootPoint.transform.right * 125, ForceMode2D.Impulse);
         }
     }
 }

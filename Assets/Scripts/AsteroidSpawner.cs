@@ -7,11 +7,12 @@ public class AsteroidSpawner : MonoBehaviour
 
     public List<Transform> spawnPoints;
 
-    // Should be from 0 - 100, 50 being 50% chance, 100 being 100%, etc...
+    // Should be from 0 - 100, 50 being 50% chance, 100 being 100%, 1 being 1%, 2 being 2%, 3 being, well you get the point right??? If you don't, I highly recommend learning about simple patterns and percentages. You can find some websites on Google, or your browser of choice. Are you still reading this, why are you letting me waste your time??
     public float spawnChance;
     public float minSize;
     public float maxSize;
     public float spawnDelay;
+    public int maxAsteroids = 35;
 
     public float minAsteroidSpacing = 5f;
     public LayerMask asteroidLayer;
@@ -43,6 +44,10 @@ public class AsteroidSpawner : MonoBehaviour
 
     public void SpawnAsteroids()
     {
+        if (GameObject.FindGameObjectsWithTag("Meteor").Length >= maxAsteroids)
+        {
+            return;
+        }
         foreach (Transform spawnPoint in spawnPoints)
         {
             if (Random.Range(0, 100) > spawnChance)

@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         if (target == null)
-            target = GameObject.FindWithTag("Player").transform;
+            target = GameObject.FindWithTag("Target").transform;
     }
 
     void FixedUpdate()

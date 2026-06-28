@@ -63,6 +63,10 @@ public class CraftingPanel : MonoBehaviour
     public void UpdateImages()
     {
         UpdateCost();
+        if (tool == null)
+        {
+            return;
+        }
         foreach (Image img in toolCraftResources)
         {
             img.gameObject.SetActive(false);

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7efa9149862cc440996fb13ea03a31fa, type: 3}
-  m_Name: GravityOrb
+  m_Name: GrowTool
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  toolName: Gravity Orb
-  description: An orb that creates a temporary gravity field
+  toolName: Grow Tool
+  description: Makes an asteroid grow
   amountCrafted: 2
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
@@ -21,5 +21,5 @@ MonoBehaviour:
   - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
     amount: 2
   coinCost: 10
-  toolPrefab: {fileID: 3885788937957104656, guid: 8f4cdf1d330bb4e2c8af9cdc4d8592d9, type: 3}
-  icon: {fileID: 7810781613950112341, guid: f6012be49aba64053a7eb335b8a8e4e2, type: 3}
+  toolPrefab: {fileID: 1368839506469391705, guid: d0663cf5ab5ab4fb9a45261ce8aff01f, type: 3}
+  icon: {fileID: 1255021164929733869, guid: f6012be49aba64053a7eb335b8a8e4e2, type: 3}

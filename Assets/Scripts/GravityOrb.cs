@@ -4,12 +4,66 @@ using UnityEngine;
 public class GravityOrb : MonoBehaviour
 {
     [Header("Detection")]
-    [SerializeField] private float radius = 8f;
-    [SerializeField] private LayerMask affectedLayers;
+    public float radius = 8f;
+    public LayerMask affectedLayers;
+    public GameObject indicatorCircle;
 
     [Header("Gravity")]
-    [SerializeField] private float attractionStrength = 20f;
+    public float attractionStrength = 20f;
+
+    public AnimationCurve forceFalloff =
+        AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+
+    [Header("Other Things")]
+    public float destroyTime = 5f;
+
+    [Header("Indicator Animation")]
+    public float growDuration = 1f;
+    public float shrinkDuration = 1f;
+    public float minScale = 0.001f;
+
     private List<Collider2D> hits = new();
+
+    private float lifeTimer;
+    private Vector3 fullScale;
+
+    void Start()
+    {
+        fullScale = Vector3.one * radius;
+
+        indicatorCircle.transform.localScale = Vector3.one * minScale;
+
+        Destroy(gameObject, destroyTime);
+    }
+
+    void Update()
+    {
+        lifeTimer += Time.deltaTime;
+
+        float scaleMultiplier = 1f;
+
+        if (lifeTimer < growDuration)
+        {
+            scaleMultiplier = Mathf.Lerp(
+                minScale,
+                1f,
+                lifeTimer / growDuration
+            );
+        }
+        else if (lifeTimer > destroyTime - shrinkDuration)
+        {
+            float t = (lifeTimer - (destroyTime - shrinkDuration)) / shrinkDuration;
+
+            scaleMultiplier = Mathf.Lerp(
+                1f,
+                minScale,
+                t
+            );
+        }
+
+        indicatorCircle.transform.localScale =
+            fullScale * scaleMultiplier;
+    }
 
     private void FixedUpdate()
     {
@@ -39,14 +93,18 @@ public class GravityOrb : MonoBehaviour
             if (distance < 0.01f)
                 continue;
 
-            float strength = 1f - (distance / radius);
+            float normalizedDistance = distance / radius;
+            float strength = forceFalloff.Evaluate(normalizedDistance);
 
-            strength *= strength;
+            if (hit.gameObject.CompareTag("Meteor"))
+            {
+                rb.AddForce(attractionStrength * strength * 5f * direction.normalized, ForceMode2D.Force);
+            }
+            else
+            {
+                rb.AddForce(attractionStrength * strength * direction.normalized, ForceMode2D.Force);
+            }
 
-            rb.AddForce(
-                attractionStrength * strength * direction.normalized,
-                ForceMode2D.Force
-            );
         }
     }
 

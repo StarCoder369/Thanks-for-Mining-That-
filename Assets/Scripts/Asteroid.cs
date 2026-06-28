@@ -25,16 +25,29 @@ public class Asteroid : MonoBehaviour
 
     [Header("Others")]
     public Sprite[] oreIndication;
+    public float maxLockTime;
+
+    [Header("Growth")]
+    public float growthMultiplier = 1.5f;
+    public float growthSpeed = 2f;
+    public float pushForce = 20f;
+    private Collider2D[] overlapResults = new Collider2D[16];
+    private ContactFilter2D overlapFilter;
+
+    private bool isGrowing;
+    private Vector3 targetScale;
 
     float currentHealth;
     float durability;
     float currentLifespan;
     float startingTime;
+    float lockTime;
 
     GameObject player;
 
     void Start()
     {
+        lockTime = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         startingTime = Time.time;
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +61,9 @@ public class Asteroid : MonoBehaviour
 
         desiredVelocity = randomizedDirection.normalized * driftSpeed;
         SetStats();
+
+        overlapFilter = new ContactFilter2D();
+        overlapFilter.useTriggers = false;
     }
 
     public void SetStats()
@@ -55,7 +71,7 @@ public class Asteroid : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         float size = transform.localScale.x;
         rb.mass = size * size / 4f;
-        durability = oreData.oreDurability * size * 0.7f;
+        durability = oreData.oreDurability * size * 1f;
         currentHealth = durability;
         Transform children = GetComponentInChildren<Transform>();
 
@@ -79,9 +95,37 @@ public class Asteroid : MonoBehaviour
         Vector2 correction = desiredVelocity - rb.linearVelocity;
         rb.AddForce(correction * steeringForce);
 
-        if (currentLifespan > 100f && Vector2.Distance(transform.position, player.transform.position) > 100)
+        if (currentLifespan > 50f && Vector2.Distance(transform.position, player.transform.position) > 100)
         {
             Destroy(gameObject, 5f);
+        }
+
+        if (lockTime > 0)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            lockTime -= Time.deltaTime;
+        }
+        else
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
+
+        if (isGrowing)
+        {
+            transform.localScale = Vector3.MoveTowards(
+                transform.localScale,
+                targetScale,
+                growthSpeed * Time.fixedDeltaTime
+            );
+
+            PushOverlappingBodies();
+
+            if (Vector3.Distance(transform.localScale, targetScale) < 0.01f)
+            {
+                transform.localScale = targetScale;
+                isGrowing = false;
+                SetStats();
+            }
         }
     }
 
@@ -132,6 +176,47 @@ public class Asteroid : MonoBehaviour
         {
             collision.gameObject.GetComponent<Player>().TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.002f);
             collision.gameObject.GetComponent<Player>().ApplyKnockback(collision.relativeVelocity * 5);
+        }
+        if (collision.gameObject.CompareTag("AsteroidLock"))
+        {
+            lockTime += maxLockTime;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("GrowTool"))
+        {
+            Grow();
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void Grow()
+    {
+        targetScale = transform.localScale * growthMultiplier;
+        isGrowing = true;
+    }
+
+    void PushOverlappingBodies()
+    {
+        Collider2D myCollider = GetComponent<Collider2D>();
+
+        int count = myCollider.Overlap(overlapFilter, overlapResults);
+
+        for (int i = 0; i < count; i++)
+        {
+            Collider2D other = overlapResults[i];
+
+            if (other == myCollider)
+                continue;
+
+            Rigidbody2D otherRb = other.attachedRigidbody;
+
+            if (otherRb == null || otherRb == rb)
+                continue;
+
+            Vector2 direction =
+                (otherRb.worldCenterOfMass - rb.worldCenterOfMass).normalized;
+
+            otherRb.AddForce(direction * 5f, ForceMode2D.Impulse);
         }
     }
 }

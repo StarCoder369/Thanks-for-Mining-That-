@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         player.currentHealth = player.maxHealth;
+        player.transform.position = Vector3.zero;
         oresStorage.Clear();
         UpdateResources();
         Time.timeScale = 1f;
@@ -101,6 +102,18 @@ public class GameManager : MonoBehaviour
 
         GameObject[] abilities = GameObject.FindGameObjectsWithTag("Ability");
         foreach (GameObject ability in abilities)
+        {
+            Destroy(ability);
+        }
+
+        GameObject[] abilities1 = GameObject.FindGameObjectsWithTag("AsteroidLock");
+        foreach (GameObject ability in abilities1)
+        {
+            Destroy(ability);
+        }
+
+        GameObject[] abilities2 = GameObject.FindGameObjectsWithTag("GrowTool");
+        foreach (GameObject ability in abilities2)
         {
             Destroy(ability);
         }

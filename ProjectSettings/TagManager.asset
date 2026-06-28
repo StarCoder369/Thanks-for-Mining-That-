@@ -8,6 +8,9 @@ TagManager:
   - Meteor
   - Ground
   - Ability
+  - AsteroidLock
+  - GrowTool
+  - Target
   layers:
   - Default
   - TransparentFX

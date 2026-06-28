@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PulseWave
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
   toolName: Pulse Wave
-  description: A pulse in the form of a wave
-  amountCrafted: 5
+  description: A wave that pushes things away
+  amountCrafted: 2
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
     amount: 2
   - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
     amount: 2
-  coinCost: 5
-  toolPrefab: {fileID: 1368839506469391705, guid: de1b595e49cb74f98909cbcf472758ff, type: 3}
+  coinCost: 10
+  toolPrefab: {fileID: 3885788937957104656, guid: 8f4cdf1d330bb4e2c8af9cdc4d8592d9, type: 3}
   icon: {fileID: 1255021164929733869, guid: f6012be49aba64053a7eb335b8a8e4e2, type: 3}
