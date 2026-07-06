@@ -484,10 +484,14 @@ MonoBehaviour:
   playerDmg: 0
   driftSpeed: 75
   steeringForce: 0.1
-  randomAngleRange: 45
+  randomAngleRange: 75
   asteroid1: 1
   asteroid2: 0
   oreIndication: []
+  maxLockTime: 15
+  growthMultiplier: 1.5
+  growthSpeed: 3
+  pushForce: 20
 --- !u!50 &798881368050042908
 Rigidbody2D:
   serializedVersion: 5

@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [Header("Stats")]
     public float maxHealth = 100f;
     public float dmg = 2f;
+    public Vector3 rotationOffset;
 
     [Header("Movement")]
     public float thrust = 5f;
@@ -26,7 +27,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         if (target == null)
-            target = GameObject.FindWithTag("Target").transform;
+            target = GameObject.FindWithTag("Player").transform;
     }
 
     void FixedUpdate()
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour
         Vector2 toTarget = (Vector2)target.position - rb.position;
 
         float targetAngle =
-            Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
+            Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg + rotationOffset.z;
 
         float newAngle = Mathf.MoveTowardsAngle(
             rb.rotation,
@@ -59,14 +60,32 @@ public class Enemy : MonoBehaviour
             rb.linearVelocity =
                 rb.linearVelocity.normalized * maxSpeed;
         }
+
+        if (GameManager.Instance.followDecoy)
+        {
+            if (target.gameObject.CompareTag("Player") || target == null)
+            {
+                target = GameObject.FindWithTag("Decoy").transform;
+            }
+        }
+        else
+        {
+            if (target.gameObject.CompareTag("Decoy") || target == null)
+            {
+                target = GameObject.FindWithTag("Player").transform;
+            }
+        }
     }
 
     public void Die()
     {
+        StatsManager.Instance.enemiesKilled++;
         GameObject instantiatedExplosion = Instantiate(Explosion, transform.position, Quaternion.identity);
 
         Destroy(instantiatedExplosion, 2f);
-        GameManager.Instance.coins += Random.Range(1, 2);
+        int coinsToAdd = Random.Range(1, 2);
+        GameManager.Instance.coins += coinsToAdd;
+        StatsManager.Instance.totalCoins += coinsToAdd;
         if (normalEnemy)
         {
             GameManager.Instance.normalEnemyPool.ReturnObject(gameObject);
@@ -78,8 +97,14 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Meteor"))
         {
-            currentHealth -=
-                collision.gameObject.GetComponent<Asteroid>().oreData.oreDurability / 2 * collision.gameObject.GetComponent<Rigidbody2D>().mass / 2;
+            if (collision.gameObject.GetComponent<Asteroid>().oreData != null)
+            {
+                currentHealth -= collision.gameObject.GetComponent<Asteroid>().oreData.oreDurability * 3 * collision.gameObject.GetComponent<Rigidbody2D>().mass / 2;
+            }
+            else
+            {
+                currentHealth -= collision.gameObject.GetComponent<Rigidbody2D>().mass * 10;
+            }
 
             collision.gameObject.GetComponent<Asteroid>().TakeDamage(dmg);
             if (currentHealth <= 0)

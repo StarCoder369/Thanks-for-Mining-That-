@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject menuPanel;
     public GameObject deathPanel;
-    public AcquireMessageSystem messageSystem;
 
     public TMP_Text coinsAmountTxt;
 
@@ -36,6 +35,8 @@ public class GameManager : MonoBehaviour
     public bool gameRunning = true;
 
     public int coins;
+
+    public bool followDecoy = false;
 
     private void Awake()
     {
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
         player.currentHealth = player.maxHealth;
         player.transform.position = Vector3.zero;
         oresStorage.Clear();
+        followDecoy = false;
         UpdateResources();
         Time.timeScale = 1f;
         Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
@@ -118,7 +120,30 @@ public class GameManager : MonoBehaviour
             Destroy(ability);
         }
 
-        player.GetComponent<PlayerGameInventory>().cooldown = 1.5f;
+        GameObject[] abilities3 = GameObject.FindGameObjectsWithTag("Decoy");
+        foreach (GameObject ability in abilities3)
+        {
+            Destroy(ability);
+        }
+
+        for (int i = 0; i < player.GetComponent<PlayerGameInventory>().cooldowns.Length; i++)
+        {
+            player.GetComponent<PlayerGameInventory>().cooldowns[i] = 1.5f;
+        }
+
+        player.GetComponent<PlayerGameInventory>().tool1Amount = 0;
+        player.GetComponent<PlayerGameInventory>().tool2Amount = 0;
+        player.GetComponent<PlayerGameInventory>().tool3Amount = 0;
+        player.GetComponent<PlayerGameInventory>().tool4Amount = 0;
+        player.GetComponent<PlayerGameInventory>().UpdateIcons();
+        player.GetComponent<PlayerGameInventory>().selectedSlot = 0;
+
+        CraftingPanel[] craftingPanels = FindObjectsByType<CraftingPanel>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (CraftingPanel panel in craftingPanels)
+        {
+            panel.UpdateImages();
+        }
+
         player.movementLocked = false;
         gameRunning = true;
     }
@@ -136,13 +161,14 @@ public class GameManager : MonoBehaviour
     {
         deathPanel.SetActive(true);
         gameRunning = false;
-        Time.timeScale = 0f;
-        messageSystem.DisablePanels();
     }
 
     public void AddItem(OreData oreToAdd, int amount)
     {
-        messageSystem.ItemMessage(oreToAdd, amount);
+        if (amount <= 0)
+        {
+            return;
+        }
 
         foreach (OreStored ores in oresStorage)
         {
@@ -162,6 +188,21 @@ public class GameManager : MonoBehaviour
 
         oresStorage.Add(oreStorageToAdd);
 
+        if (oreToAdd.oreName == "Copper")
+        {
+            StatsManager.Instance.totalCopperCount += amount;
+        }
+
+        if (oreToAdd.oreName == "Iron")
+        {
+            StatsManager.Instance.totalIronCount += amount;
+        }
+
+        if (oreToAdd.oreName == "Gold")
+        {
+            StatsManager.Instance.totalGoldCount += amount;
+        }
+
         UpdateResources();
     }
 
@@ -171,7 +212,7 @@ public class GameManager : MonoBehaviour
         {
             if (ores.ore == oreToRemove)
             {
-                if ((ores.amountStored -= amount) <= 0)
+                if ((ores.amountStored - amount) <= 0)
                 {
                     oresStorage.Remove(ores);
                 }

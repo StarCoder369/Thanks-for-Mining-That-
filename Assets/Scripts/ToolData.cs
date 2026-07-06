@@ -17,6 +17,8 @@ public class ToolData : ScriptableObject
 
     public int amountCrafted;
 
+    public float cooldown;
+
     public List<OreCost> cost;
     public int coinCost;
 

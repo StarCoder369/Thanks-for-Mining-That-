@@ -249,6 +249,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        StatsManager.Instance.timesDied++;
         GameManager.Instance.PlayerDie();
     }
 }

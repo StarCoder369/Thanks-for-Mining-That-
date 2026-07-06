@@ -52,18 +52,18 @@ public class Asteroid : MonoBehaviour
         startingTime = Time.time;
         rb = GetComponent<Rigidbody2D>();
 
-        Vector2 toCenter = (-transform.position).normalized;
+        overlapFilter = new ContactFilter2D();
+        overlapFilter.useTriggers = false;
+
+        Vector2 toPlayer = (player.transform.position - transform.position).normalized;
 
         float randomAngle = Random.Range(-randomAngleRange, randomAngleRange);
 
         Vector2 randomizedDirection =
-            Quaternion.Euler(0, 0, randomAngle) * toCenter;
+            Quaternion.Euler(0, 0, randomAngle) * toPlayer;
 
         desiredVelocity = randomizedDirection.normalized * driftSpeed;
         SetStats();
-
-        overlapFilter = new ContactFilter2D();
-        overlapFilter.useTriggers = false;
     }
 
     public void SetStats()
@@ -71,38 +71,75 @@ public class Asteroid : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         float size = transform.localScale.x;
         rb.mass = size * size / 4f;
-        durability = oreData.oreDurability * size * 1f;
-        currentHealth = durability;
-        Transform children = GetComponentInChildren<Transform>();
-
-        foreach (Transform child in children)
+        if (oreData != null)
         {
-            child.GetComponent<SpriteRenderer>().sprite = oreData.oreIcon;
-            float randomScale = Random.Range(0.09f, 0.12f);
-            child.localScale = new Vector2(randomScale, randomScale);
+            durability = oreData.oreDurability * size * 1f;
+        }
+        else
+        {
+            durability = 1.2f * size;
+        }
 
-            Color tempColor = child.GetComponent<SpriteRenderer>().color;
+        currentHealth = durability;
 
-            tempColor.a = Random.Range(0.2f, 0.4f);
+        foreach (Transform child in transform)
+        {
+            if (oreData != null)
+            {
+                child.gameObject.SetActive(true);
+                child.GetComponent<SpriteRenderer>().sprite = oreData.oreIcon;
+                float randomScale = Random.Range(0.1f, 0.1f);
+                child.localScale = new Vector2(randomScale, randomScale);
 
-            child.GetComponent<SpriteRenderer>().color = tempColor;
+                Color tempColor = child.GetComponent<SpriteRenderer>().color;
+
+                tempColor.a = Random.Range(0.2f, 0.4f);
+
+                child.GetComponent<SpriteRenderer>().color = tempColor;
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+
         }
     }
 
     void FixedUpdate()
     {
+        if (oreData == null)
+        {
+            driftSpeed = 0;
+        }
+        else
+        {
+            driftSpeed = 75f;
+        }
         currentLifespan = Time.time - startingTime;
         Vector2 correction = desiredVelocity - rb.linearVelocity;
-        rb.AddForce(correction * steeringForce);
 
-        if (currentLifespan > 50f && Vector2.Distance(transform.position, player.transform.position) > 100)
+        if (oreData != null)
         {
-            Destroy(gameObject, 5f);
+            rb.AddForce(correction * steeringForce);
+        }
+
+        if (currentLifespan > Random.Range(50, 100) && Vector2.Distance(transform.position, player.transform.position) > 400)
+        {
+            if (asteroid1)
+            {
+                GameManager.Instance.normalAsteroidPool.ReturnObject(gameObject);
+            }
+            else if (asteroid2)
+            {
+                GameManager.Instance.roundAsteroidPool.ReturnObject(gameObject);
+            }
         }
 
         if (lockTime > 0)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0;
             lockTime -= Time.deltaTime;
         }
         else
@@ -127,6 +164,13 @@ public class Asteroid : MonoBehaviour
                 SetStats();
             }
         }
+
+        float size = transform.localScale.x;
+
+        if (oreData == null)
+        {
+            SetStats();
+        }
     }
 
     public void TakeDamage(float dmg)
@@ -141,13 +185,20 @@ public class Asteroid : MonoBehaviour
 
     public void Die()
     {
+        if (oreData == null)
+        {
+            return;
+        }
         GameManager.Instance.AddItem(
             oreData,
             Random.Range(minAmountToDrop, maxAmountToDrop)
         );
 
-        GameManager.Instance.coins += Random.Range(1, 2);
+        int coinsToAdd = Random.Range(1, 2);
+        GameManager.Instance.coins += coinsToAdd;
+        StatsManager.Instance.totalCoins += coinsToAdd;
 
+        StatsManager.Instance.asteroidsDestroyed++;
         if (explosion != null)
         {
             GameObject instantiatedExplosion = Instantiate(explosion, transform.position, Quaternion.identity);
@@ -169,8 +220,16 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Meteor"))
         {
-            rb.AddForce(collision.relativeVelocity * 7, ForceMode2D.Impulse);
-            TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.0001f * collision.gameObject.GetComponent<Rigidbody2D>().mass);
+            if (oreData == null)
+            {
+                rb.AddForce(collision.relativeVelocity, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.AddForce(collision.relativeVelocity * 7, ForceMode2D.Impulse);
+            }
+
+            TakeDamage(rb.mass * rb.linearVelocity.magnitude * 0.00002f * collision.gameObject.GetComponent<Rigidbody2D>().mass);
         }
         if (collision.gameObject.CompareTag("Player"))
         {

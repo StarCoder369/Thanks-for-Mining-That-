@@ -7,26 +7,19 @@ public class AsteroidForge : MonoBehaviour
     public GameObject effect;
 
     public float timeToStart = 2f;
-    public float timeToMaxSize = 3f;
     public float maxSize = 3f;
     public float sizeStep = 1f;
 
     float timeLeft;
     bool canScale;
 
+    bool scale = true;
+
     GameObject instantiatedAsteroid;
 
     void Start()
     {
         timeLeft = timeToStart;
-
-        if (asteroids == null || asteroids.Count == 0)
-        {
-            return;
-        }
-
-        instantiatedAsteroid =
-            Instantiate(asteroids[Random.Range(0, asteroids.Count)]);
 
         canScale = false;
     }
@@ -43,20 +36,24 @@ public class AsteroidForge : MonoBehaviour
             }
         }
 
-        if (canScale && instantiatedAsteroid != null)
+        if (canScale && instantiatedAsteroid != null && scale)
         {
-            instantiatedAsteroid.transform.localScale +=
-                Vector3.one * sizeStep * Time.deltaTime;
+            instantiatedAsteroid.transform.localScale += sizeStep * Time.deltaTime * Vector3.one;
 
             if (instantiatedAsteroid.transform.localScale.x >= maxSize)
             {
-                Destroy(gameObject);
+                scale = false;
+                instantiatedAsteroid.GetComponent<Asteroid>().SetStats();
             }
         }
 
-        if (instantiatedAsteroid == null)
+        if (instantiatedAsteroid == null && canScale)
         {
             Destroy(gameObject);
+        }
+        if (instantiatedAsteroid != null)
+        {
+            transform.position = instantiatedAsteroid.transform.position;
         }
     }
 
@@ -64,9 +61,31 @@ public class AsteroidForge : MonoBehaviour
     {
         canScale = true;
 
-        if (effect != null)
+        if (asteroids == null || asteroids.Count == 0)
         {
-            Destroy(effect);
+            return;
         }
+
+        int randomInt = Random.Range(0, 2);
+
+        if (randomInt == 0)
+        {
+            instantiatedAsteroid = GameManager.Instance.roundAsteroidPool.GetObject();
+        }
+        else
+        {
+            instantiatedAsteroid = GameManager.Instance.normalAsteroidPool.GetObject();
+        }
+
+        instantiatedAsteroid.transform.localScale = new Vector2(1f, 1f);
+        instantiatedAsteroid.GetComponent<Asteroid>().oreData = null;
+        instantiatedAsteroid.GetComponent<Asteroid>().SetStats();
+        instantiatedAsteroid.transform.position = transform.position;
+        instantiatedAsteroid.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject);
     }
 }

@@ -20,12 +20,16 @@ public class PlayerGameInventory : MonoBehaviour
     public float tool3Amount;
     public float tool4Amount;
 
+    public float[] cooldowns;
+
+    public TMP_Text[] toolNames;
+
     public float maxCooldown;
     public float scrollThreshold = 120f;
 
     public Transform shootPoint;
 
-    int selectedSlot;
+    [HideInInspector] public int selectedSlot;
 
     public float cooldown;
 
@@ -66,11 +70,18 @@ public class PlayerGameInventory : MonoBehaviour
             scrollAccumulator = 0f;
         }
 
-        if ((Keyboard.current.spaceKey.wasReleasedThisFrame || Mouse.current.leftButton.wasReleasedThisFrame) && cooldown <= 0 && GameManager.Instance.craftingPanel.activeSelf == false && Time.timeScale != 0)
+        if ((Keyboard.current.spaceKey.wasReleasedThisFrame || Mouse.current.leftButton.wasReleasedThisFrame) && GameManager.Instance.craftingPanel.activeSelf == false && Time.timeScale != 0)
         {
             StartShoot();
         }
-        cooldown -= Time.deltaTime;
+
+        for (int i = 0; i < cooldowns.Length; i++)
+        {
+            if (cooldowns[i] > 0)
+            {
+                cooldowns[i] -= Time.deltaTime;
+            }
+        }
 
         UpdateAlpha();
     }
@@ -148,31 +159,62 @@ public class PlayerGameInventory : MonoBehaviour
         {
             slot1.sprite = tool1.icon;
             slot1.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool1Amount}";
+            toolNames[0].text = tool1.toolName;
+        }
+        else
+        {
+            slot2.sprite = null;
+            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            toolNames[0].text = "";
         }
 
         if (tool2 != null)
         {
             slot2.sprite = tool2.icon;
             slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool2Amount}";
+            toolNames[1].text = tool1.toolName;
+        }
+        else
+        {
+            slot2.sprite = null;
+            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            toolNames[1].text = "";
         }
 
         if (tool3 != null)
         {
             slot3.sprite = tool3.icon;
             slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool3Amount}";
+            toolNames[2].text = tool1.toolName;
+        }
+        else
+        {
+            slot3.sprite = null;
+            slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            toolNames[2].text = "";
         }
 
         if (tool4 != null)
         {
             slot4.sprite = tool4.icon;
             slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool4Amount}";
+            toolNames[3].text = tool1.toolName;
+        }
+        else
+        {
+            slot4.sprite = null;
+            slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            toolNames[3].text = "";
         }
     }
 
     public void StartShoot()
     {
+        if (cooldowns[selectedSlot] > 0)
+        {
+            return;
+        }
         Debug.Log("Started shoot");
-        cooldown = maxCooldown;
         GetComponent<Animator>().Play("Shoot");
     }
 
@@ -182,31 +224,51 @@ public class PlayerGameInventory : MonoBehaviour
         switch (selectedSlot)
         {
             case 0:
+                if (tool1 == null)
+                {
+                    break;
+                }
                 if (tool1Amount > 0)
                 {
                     instantiatedModule = Instantiate(tool1.toolPrefab, shootPoint.position, shootPoint.rotation);
                     tool1Amount -= 1;
+                    cooldowns[0] = tool1.cooldown;
                 }
                 break;
             case 1:
+                if (tool2 == null)
+                {
+                    break;
+                }
                 if (tool2Amount > 0)
                 {
                     instantiatedModule = Instantiate(tool2.toolPrefab, shootPoint.position, shootPoint.rotation);
                     tool2Amount -= 1;
+                    cooldowns[1] = tool2.cooldown;
                 }
                 break;
             case 2:
+                if (tool3 == null)
+                {
+                    break;
+                }
                 if (tool3Amount > 0)
                 {
                     instantiatedModule = Instantiate(tool3.toolPrefab, shootPoint.position, shootPoint.rotation);
                     tool3Amount -= 1;
+                    cooldowns[2] = tool3.cooldown;
                 }
                 break;
             case 3:
+                if (tool4 == null)
+                {
+                    break;
+                }
                 if (tool4Amount > 0)
                 {
                     instantiatedModule = Instantiate(tool4.toolPrefab, shootPoint.position, shootPoint.rotation);
                     tool4Amount -= 1;
+                    cooldowns[3] = tool4.cooldown;
                 }
                 break;
         }
@@ -215,7 +277,8 @@ public class PlayerGameInventory : MonoBehaviour
 
         if (instantiatedModule != null)
         {
-            instantiatedModule.GetComponent<Rigidbody2D>().AddForce(shootPoint.transform.right * 125, ForceMode2D.Impulse);
+            instantiatedModule.GetComponent<Rigidbody2D>().AddForce(shootPoint.transform.right * 200, ForceMode2D.Impulse);
+            StatsManager.Instance.totalToolUsage++;
         }
     }
 }

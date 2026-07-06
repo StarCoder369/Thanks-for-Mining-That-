@@ -12,6 +12,7 @@ public class CraftingPanel : MonoBehaviour
     public Image[] toolCraftResources;
     public Image output;
     public TMP_Text outputAmount;
+    public TMP_Text outputName;
 
     public List<ToolData.OreCost> cost;
 
@@ -85,10 +86,15 @@ public class CraftingPanel : MonoBehaviour
 
         output.sprite = tool.icon;
         outputAmount.text = $"x{tool.amountCrafted}";
+        outputName.text = tool.toolName;
     }
 
     public void TryCraft()
     {
+        if (tool == null)
+        {
+            return;
+        }
         foreach (Image item in toolCraftResources)
         {
             if (GameManager.Instance.ContainsResource(item.GetComponent<CraftingSlot>().data) >= item.GetComponent<CraftingSlot>().amountNeeded)
@@ -106,6 +112,10 @@ public class CraftingPanel : MonoBehaviour
 
     public void Craft()
     {
+        if (tool == null)
+        {
+            return;
+        }
         int index = slotNum - 1;
 
         foreach (ToolData.OreCost item in cost)

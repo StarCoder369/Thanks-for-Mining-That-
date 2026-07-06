@@ -4,7 +4,7 @@ public class DecoyMovement : MonoBehaviour
 {
     public GameObject player;
 
-    public bool decoyMove;
+    public bool decoyMove = true;
     public float moveSpeed = 5f;
     public float maxMoveTime = 5f;
 
@@ -88,22 +88,6 @@ public class DecoyMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90f);
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (decoyMove)
-        {
-            StopDecoy();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (decoyMove)
-        {
-            StopDecoy();
-        }
     }
 
     private void StopDecoy()

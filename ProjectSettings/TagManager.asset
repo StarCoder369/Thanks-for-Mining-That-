@@ -10,6 +10,7 @@ TagManager:
   - Ability
   - AsteroidLock
   - GrowTool
+  - Decoy
   - Target
   layers:
   - Default
@@ -21,7 +22,7 @@ TagManager:
   - Boundary
   - Ignore Boundary
   - Asteroid Layer
-  - 
+  - Post Processing
   - 
   - 
   - 

@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efa9149862cc440996fb13ea03a31fa, type: 3}
   m_Name: AsteroidLock
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
-  toolName: Asteroid LOck
+  toolName: Asteroid Lock
   description: Locks an asteroid in place temporarily
   amountCrafted: 2
+  cooldown: 1
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-    amount: 2
+    amount: 0
   - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-    amount: 2
+    amount: 0
   coinCost: 10
-  toolPrefab: {fileID: 1368839506469391705, guid: d0663cf5ab5ab4fb9a45261ce8aff01f, type: 3}
+  toolPrefab: {fileID: 3885788937957104656, guid: dfde701350ee04064b298b310a400b0b, type: 3}
   icon: {fileID: 1255021164929733869, guid: f6012be49aba64053a7eb335b8a8e4e2, type: 3}
