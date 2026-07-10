@@ -122,6 +122,26 @@ public class PlayerGameInventory : MonoBehaviour
             SetAlpha(slot3, 0.4f);
             SetAlpha(slot4, 1f);
         }
+
+        if (tool1 == null)
+        {
+            SetAlpha(slot1, 0.1f);
+        }
+
+        if (tool2 == null)
+        {
+            SetAlpha(slot2, 0.1f);
+        }
+
+        if (tool3 == null)
+        {
+            SetAlpha(slot3, 0.1f);
+        }
+
+        if (tool4 == null)
+        {
+            SetAlpha(slot4, 0.1f);
+        }
     }
 
     public void SetAlpha(Image image, float alpha)
@@ -164,7 +184,7 @@ public class PlayerGameInventory : MonoBehaviour
         else
         {
             slot2.sprite = null;
-            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "None";
             toolNames[0].text = "";
         }
 
@@ -177,7 +197,7 @@ public class PlayerGameInventory : MonoBehaviour
         else
         {
             slot2.sprite = null;
-            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "None";
             toolNames[1].text = "";
         }
 
@@ -190,7 +210,7 @@ public class PlayerGameInventory : MonoBehaviour
         else
         {
             slot3.sprite = null;
-            slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = "None";
             toolNames[2].text = "";
         }
 
@@ -203,7 +223,7 @@ public class PlayerGameInventory : MonoBehaviour
         else
         {
             slot4.sprite = null;
-            slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = "None";
             toolNames[3].text = "";
         }
     }

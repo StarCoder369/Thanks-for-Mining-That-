@@ -19,6 +19,33 @@ public class ShopPanel : MonoBehaviour
     public bool unlocked = false;
     public bool equipped = false;
 
+    public int index;
+
+    public void LoadValues()
+    {
+        unlocked = StatsManager.Instance.IsToolUnlocked(index);
+        equipped = StatsManager.Instance.IsToolEquipped(index);
+
+        if (equipped)
+        {
+            for (int i = 0; i < shop.toolAvailable.Length; i++)
+            {
+                if (shop.toolAvailable[i])
+                {
+                    equipped = true;
+                    shop.tools[i] = tool;
+                    shop.equippedPanels[i] = GetComponent<ShopPanel>();
+                    shop.UpdateFields();
+                    infoBtn.interactable = false;
+                    UpdateInfoPanel();
+                    break;
+                }
+            }
+        }
+
+        UpdateInfoPanel();
+    }
+
     void Update()
     {
         if (tool == null)
@@ -79,10 +106,11 @@ public class ShopPanel : MonoBehaviour
                     {
                         equipped = true;
                         shop.tools[i] = tool;
-                        shop.equippedPanels[i] = gameObject.GetComponent<ShopPanel>();
+                        shop.equippedPanels[i] = GetComponent<ShopPanel>();
                         shop.UpdateFields();
                         infoBtn.interactable = false;
                         UpdateInfoPanel();
+                        StatsManager.Instance.toolEquipped[index] = true;
                         break;
                     }
                 }
@@ -96,6 +124,7 @@ public class ShopPanel : MonoBehaviour
                 unlocked = true;
                 equipped = false;
             }
+            StatsManager.Instance.toolUnlocked[index] = true;
         }
         UpdateInfoPanel();
     }

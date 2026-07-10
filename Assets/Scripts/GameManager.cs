@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         gameRunning = false;
         BackToMainMenu();
+        coins = StatsManager.Instance.coins;
     }
 
     void Update()
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         }
 
         coinsAmountTxt.text = coins.ToString();
+        StatsManager.Instance.coins = coins;
     }
 
     public void DisableEnableCrafting()

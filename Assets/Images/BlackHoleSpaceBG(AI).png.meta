@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: c72f9f30603ed47549aac0d674b0a7dd
+guid: e93e12e1f53394b64adabab73fccea43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3694423626176326351
-    second: ThanksForMiningThatTitle_0
-  - first:
-      213: -3833609055881161387
-    second: ThanksForMiningThatTitle_1
-  - first:
-      213: -4004502841324541172
-    second: ThanksForMiningThatTitle_2
+      213: -8974749092446370102
+    second: BlackHoleSpaceBG(AI)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -106,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ThanksForMiningThatTitle_0
+      name: BlackHoleSpaceBG(AI)_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 76
-        width: 350
-        height: 136
+        x: 0
+        y: 0
+        width: 1122
+        height: 1402
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 13513ff2945cabcc0800000000000000
-      internalID: -3694423626176326351
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThanksForMiningThatTitle_1
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 186
-        width: 37
-        height: 45
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5559b7000e84ccac0800000000000000
-      internalID: -3833609055881161387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ThanksForMiningThatTitle_2
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 30
-        width: 47
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c0beec0f1e52d68c0800000000000000
-      internalID: -4004502841324541172
+      spriteID: ac6897c2049437380800000000000000
+      internalID: -8974749092446370102
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ThanksForMiningThatTitle_0: -3694423626176326351
-      ThanksForMiningThatTitle_1: -3833609055881161387
-      ThanksForMiningThatTitle_2: -4004502841324541172
+      BlackHoleSpaceBG(AI)_0: -8974749092446370102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
