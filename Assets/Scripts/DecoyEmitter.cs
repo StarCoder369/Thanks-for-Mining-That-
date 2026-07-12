@@ -10,20 +10,13 @@ public class DecoyEmitter : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         Invoke(nameof(SpawnDecoy), 0.7f);
-        Destroy(gameObject, destroyTime + 1);
+        Destroy(gameObject, destroyTime);
     }
 
     public void SpawnDecoy()
     {
         GameObject instantiatedDecoy = Instantiate(decoy, transform.position, transform.rotation);
-        Destroy(instantiatedDecoy, destroyTime);
-        instantiatedDecoy.GetComponent<DecoyMovement>().maxMoveTime = destroyTime;
         instantiatedDecoy.GetComponent<DecoyMovement>().decoyMove = true;
         GameManager.Instance.followDecoy = true;
-    }
-
-    void OnDestroy()
-    {
-        GameManager.Instance.followDecoy = false;
     }
 }

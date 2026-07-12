@@ -197,8 +197,10 @@ public class Asteroid : MonoBehaviour
         int coinsToAdd = Random.Range(1, 2);
         GameManager.Instance.coins += coinsToAdd;
         StatsManager.Instance.totalCoins += coinsToAdd;
+        StatsManager.Instance.allTotalCoins += coinsToAdd;
 
         StatsManager.Instance.asteroidsDestroyed++;
+        StatsManager.Instance.allAsteroidsDestroyed++;
         if (explosion != null)
         {
             GameObject instantiatedExplosion = Instantiate(explosion, transform.position, Quaternion.identity);

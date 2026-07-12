@@ -192,7 +192,7 @@ public class PlayerGameInventory : MonoBehaviour
         {
             slot2.sprite = tool2.icon;
             slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool2Amount}";
-            toolNames[1].text = tool1.toolName;
+            toolNames[1].text = tool2.toolName;
         }
         else
         {
@@ -205,7 +205,7 @@ public class PlayerGameInventory : MonoBehaviour
         {
             slot3.sprite = tool3.icon;
             slot3.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool3Amount}";
-            toolNames[2].text = tool1.toolName;
+            toolNames[2].text = tool3.toolName;
         }
         else
         {
@@ -218,7 +218,7 @@ public class PlayerGameInventory : MonoBehaviour
         {
             slot4.sprite = tool4.icon;
             slot4.transform.GetChild(0).GetComponent<TMP_Text>().text = $"x{tool4Amount}";
-            toolNames[3].text = tool1.toolName;
+            toolNames[3].text = tool4.toolName;
         }
         else
         {
@@ -299,6 +299,7 @@ public class PlayerGameInventory : MonoBehaviour
         {
             instantiatedModule.GetComponent<Rigidbody2D>().AddForce(shootPoint.transform.right * 200, ForceMode2D.Impulse);
             StatsManager.Instance.totalToolUsage++;
+            StatsManager.Instance.allTotalToolUsage++;
         }
     }
 }

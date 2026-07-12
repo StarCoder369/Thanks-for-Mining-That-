@@ -48,6 +48,7 @@ public class ShopManager : MonoBehaviour
     {
         tools[index] = null;
         equippedPanels[index].equipped = false;
+        StatsManager.Instance.toolEquipped[equippedPanels[index].index] = false;
         equippedPanels[index].UpdateInfoPanel();
         equippedPanels[index] = null;
         UpdateFields();

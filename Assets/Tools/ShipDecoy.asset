@@ -15,7 +15,7 @@ MonoBehaviour:
   toolName: Ship Decoy
   description: Creates a decoy that lures enemies away
   amountCrafted: 2
-  cooldown: 8
+  cooldown: 6
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
     amount: 0
@@ -23,4 +23,4 @@ MonoBehaviour:
     amount: 0
   coinCost: 10
   toolPrefab: {fileID: 3885788937957104656, guid: cf5b903458d4c4720b1a73053b7ea2e9, type: 3}
-  icon: {fileID: 7810781613950112341, guid: f6012be49aba64053a7eb335b8a8e4e2, type: 3}
+  icon: {fileID: 6417038043319163069, guid: 52bf8adfaf3eb42828693f225cf19bb2, type: 3}

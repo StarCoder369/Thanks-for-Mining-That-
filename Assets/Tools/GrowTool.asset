@@ -23,4 +23,4 @@ MonoBehaviour:
     amount: 0
   coinCost: 10
   toolPrefab: {fileID: 1368839506469391705, guid: 6a62e0dd9d5e44f0d9c6f5f0bf03bf5f, type: 3}
-  icon: {fileID: 1255021164929733869, guid: f6012be49aba64053a7eb335b8a8e4e2, type: 3}
+  icon: {fileID: -2566087584513626101, guid: 52bf8adfaf3eb42828693f225cf19bb2, type: 3}

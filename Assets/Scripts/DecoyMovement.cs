@@ -35,14 +35,6 @@ public class DecoyMovement : MonoBehaviour
             directionTimer = 0f;
             initialized = false;
 
-            if (transform.parent != player.transform)
-            {
-                transform.SetParent(player.transform, true);
-                transform.position = player.transform.position;
-                transform.rotation = player.transform.rotation;
-                transform.localPosition = Vector3.zero;
-            }
-
             return;
         }
         else
@@ -55,9 +47,8 @@ public class DecoyMovement : MonoBehaviour
             initialized = true;
 
             transform.SetParent(null, true);
-            transform.position = player.transform.position;
 
-            baseDirection = (Quaternion.Euler(0, 0, -90f) * player.transform.up).normalized;
+            baseDirection = (Quaternion.Euler(0, 0, -90f) * transform.up).normalized;
             currentDirection = baseDirection;
         }
 
@@ -96,5 +87,11 @@ public class DecoyMovement : MonoBehaviour
         moveTimer = 0f;
         directionTimer = 0f;
         initialized = false;
+        Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.followDecoy = false;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class OreStored
@@ -38,6 +39,12 @@ public class GameManager : MonoBehaviour
 
     public bool followDecoy = false;
 
+    public int runsCompleted;
+
+    public GameObject statsScreen;
+
+    float secondTimer;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -54,6 +61,7 @@ public class GameManager : MonoBehaviour
         gameRunning = false;
         BackToMainMenu();
         coins = StatsManager.Instance.coins;
+        runsCompleted = StatsManager.Instance.completedRuns;
     }
 
     void Update()
@@ -61,6 +69,18 @@ public class GameManager : MonoBehaviour
         if (Keyboard.current.eKey.wasPressedThisFrame)
         {
             DisableEnableCrafting();
+        }
+
+        if (gameRunning)
+        {
+            secondTimer += Time.deltaTime;
+
+            if (secondTimer >= 1f)
+            {
+                StatsManager.Instance.timeInGame++;
+                StatsManager.Instance.allTimeInGame++;
+                secondTimer = 0f;
+            }
         }
 
         coinsAmountTxt.text = coins.ToString();
@@ -193,16 +213,19 @@ public class GameManager : MonoBehaviour
         if (oreToAdd.oreName == "Copper")
         {
             StatsManager.Instance.totalCopperCount += amount;
+            StatsManager.Instance.allTotalCopperCount += amount;
         }
 
         if (oreToAdd.oreName == "Iron")
         {
             StatsManager.Instance.totalIronCount += amount;
+            StatsManager.Instance.allTotalIronCount += amount;
         }
 
         if (oreToAdd.oreName == "Gold")
         {
             StatsManager.Instance.totalGoldCount += amount;
+            StatsManager.Instance.allTotalGoldCount += amount;
         }
 
         UpdateResources();
@@ -310,5 +333,23 @@ public class GameManager : MonoBehaviour
             }
         }
         return itemCount;
+    }
+
+    public void EndGame()
+    {
+        StatsManager.Instance.completedRuns++;
+        runsCompleted = StatsManager.Instance.completedRuns;
+        statsScreen.SetActive(true);
+        StatsManager.Instance.statsScreenAppeared = true;
+        StatsManager.Instance.Save();
+        StatsManager.Instance.UpdateAllRunsFields();
+        StatsManager.Instance.UpdateThisRunFields();
+        Time.timeScale = 0;
+    }
+
+    public void NewRun()
+    {
+        StatsManager.Instance.ResetThisRunFields();
+        SceneManager.LoadScene("Game");
     }
 }

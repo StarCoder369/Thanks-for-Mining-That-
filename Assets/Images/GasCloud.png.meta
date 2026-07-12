@@ -1,0 +1,923 @@
+fileFormatVersion: 2
+guid: b48dec63a7f854feab9a6b6cb34dfc03
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4444307173166908352
+    second: GasCloud_0
+  - first:
+      213: 8932222187794575670
+    second: GasCloud_1
+  - first:
+      213: 3451008878012174603
+    second: GasCloud_2
+  - first:
+      213: 3532044749658815135
+    second: GasCloud_3
+  - first:
+      213: 5254383212416409956
+    second: GasCloud_4
+  - first:
+      213: -1601595997437963639
+    second: GasCloud_5
+  - first:
+      213: 8809753686402597297
+    second: GasCloud_6
+  - first:
+      213: 8148729841600659849
+    second: GasCloud_7
+  - first:
+      213: -4609402942560668965
+    second: GasCloud_8
+  - first:
+      213: -3009987268139468001
+    second: GasCloud_9
+  - first:
+      213: -264791165007086321
+    second: GasCloud_10
+  - first:
+      213: 5748094661229665324
+    second: GasCloud_11
+  - first:
+      213: -9084757735971676400
+    second: GasCloud_12
+  - first:
+      213: 3995937643965036297
+    second: GasCloud_13
+  - first:
+      213: 5734843904259558406
+    second: GasCloud_14
+  - first:
+      213: -5308614935482944368
+    second: GasCloud_15
+  - first:
+      213: -8983476671925405945
+    second: GasCloud_16
+  - first:
+      213: -8601515289004924751
+    second: GasCloud_17
+  - first:
+      213: 8472186989113052408
+    second: GasCloud_18
+  - first:
+      213: 858186820784452427
+    second: GasCloud_19
+  - first:
+      213: 1940216661213430749
+    second: GasCloud_20
+  - first:
+      213: 8873246434783852444
+    second: GasCloud_21
+  - first:
+      213: -8020063794236220136
+    second: GasCloud_22
+  - first:
+      213: 4500103638772971017
+    second: GasCloud_23
+  - first:
+      213: 8970210222380199415
+    second: GasCloud_24
+  - first:
+      213: -122764059604991926
+    second: GasCloud_25
+  - first:
+      213: -7793483749441779950
+    second: GasCloud_26
+  - first:
+      213: 250320290457467961
+    second: GasCloud_27
+  - first:
+      213: -8253181729213488290
+    second: GasCloud_28
+  - first:
+      213: -3086455338553293932
+    second: GasCloud_29
+  - first:
+      213: 196722939371411944
+    second: GasCloud_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GasCloud_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 13
+        width: 100
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c38559b3d95dad30800000000000000
+      internalID: 4444307173166908352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 107
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 631bb5e31c0a5fb70800000000000000
+      internalID: 8932222187794575670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_2
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 13
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0192a25a4274ef20800000000000000
+      internalID: 3451008878012174603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_3
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 108
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9a723a7cf7540130800000000000000
+      internalID: 3532044749658815135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_4
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 109
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4612bd951b15be840800000000000000
+      internalID: 5254383212416409956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_5
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 110
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 982d50b0decf5c9e0800000000000000
+      internalID: -1601595997437963639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_6
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 111
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b107bc3d48824a70800000000000000
+      internalID: 8809753686402597297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_7
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 112
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9818b3bfd9a161170800000000000000
+      internalID: 8148729841600659849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_8
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 19
+        width: 86
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd2f706027c1800c0800000000000000
+      internalID: -4609402942560668965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_9
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 112
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b3918f6806a36d0800000000000000
+      internalID: -3009987268139468001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_10
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 111
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0d371e96d5435cf0800000000000000
+      internalID: -264791165007086321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_11
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 110
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2cd9e1c3a555cf40800000000000000
+      internalID: 5748094661229665324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_12
+      rect:
+        serializedVersion: 2
+        x: 1372
+        y: 109
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01f1de4e8f47ce180800000000000000
+      internalID: -9084757735971676400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_13
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 13
+        width: 99
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 907b525ad1c647730800000000000000
+      internalID: 3995937643965036297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_14
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 108
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60c84bb7522469f40800000000000000
+      internalID: 5734843904259558406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_15
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 13
+        width: 100
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 094b439a7d20456b0800000000000000
+      internalID: -5308614935482944368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_16
+      rect:
+        serializedVersion: 2
+        x: 1627
+        y: 107
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 707b0e93097445380800000000000000
+      internalID: -8983476671925405945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_17
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 20
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b025ccda6741a880800000000000000
+      internalID: -8601515289004924751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_18
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 23
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fc05c4dd21439570800000000000000
+      internalID: 8472186989113052408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_19
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 26
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4377cbdd54e8eb00800000000000000
+      internalID: 858186820784452427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_20
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 14
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd3cbee06c80dea10800000000000000
+      internalID: 1940216661213430749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_21
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 15
+        width: 97
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c97fac5be9a142b70800000000000000
+      internalID: 8873246434783852444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_22
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 17
+        width: 90
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81d1494a87203b090800000000000000
+      internalID: -8020063794236220136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_23
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 18
+        width: 87
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9067189ba64937e30800000000000000
+      internalID: 4500103638772971017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_24
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 18
+        width: 87
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fdac89cba69c7c70800000000000000
+      internalID: 8970210222380199415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_25
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 17
+        width: 90
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a404f0cfcbadb4ef0800000000000000
+      internalID: -122764059604991926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_26
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 15
+        width: 97
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2174ebf42dbf7d390800000000000000
+      internalID: -7793483749441779950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_27
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 26
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93c3ac85af0597300800000000000000
+      internalID: 250320290457467961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_28
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 14
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e536c7bc1fec67d80800000000000000
+      internalID: -8253181729213488290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_29
+      rect:
+        serializedVersion: 2
+        x: 1415
+        y: 23
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4934c6ae835ba25d0800000000000000
+      internalID: -3086455338553293932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasCloud_30
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 20
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e957689876eab200800000000000000
+      internalID: 196722939371411944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GasCloud_0: 4444307173166908352
+      GasCloud_1: 8932222187794575670
+      GasCloud_10: -264791165007086321
+      GasCloud_11: 5748094661229665324
+      GasCloud_12: -9084757735971676400
+      GasCloud_13: 3995937643965036297
+      GasCloud_14: 5734843904259558406
+      GasCloud_15: -5308614935482944368
+      GasCloud_16: -8983476671925405945
+      GasCloud_17: -8601515289004924751
+      GasCloud_18: 8472186989113052408
+      GasCloud_19: 858186820784452427
+      GasCloud_2: 3451008878012174603
+      GasCloud_20: 1940216661213430749
+      GasCloud_21: 8873246434783852444
+      GasCloud_22: -8020063794236220136
+      GasCloud_23: 4500103638772971017
+      GasCloud_24: 8970210222380199415
+      GasCloud_25: -122764059604991926
+      GasCloud_26: -7793483749441779950
+      GasCloud_27: 250320290457467961
+      GasCloud_28: -8253181729213488290
+      GasCloud_29: -3086455338553293932
+      GasCloud_3: 3532044749658815135
+      GasCloud_30: 196722939371411944
+      GasCloud_4: 5254383212416409956
+      GasCloud_5: -1601595997437963639
+      GasCloud_6: 8809753686402597297
+      GasCloud_7: 8148729841600659849
+      GasCloud_8: -4609402942560668965
+      GasCloud_9: -3009987268139468001
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

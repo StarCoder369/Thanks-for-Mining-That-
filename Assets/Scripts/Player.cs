@@ -250,6 +250,15 @@ public class Player : MonoBehaviour
     public void Die()
     {
         StatsManager.Instance.timesDied++;
+        StatsManager.Instance.allTimesDied++;
         GameManager.Instance.PlayerDie();
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Barrier"))
+        {
+            TakeDamage(25);
+        }
     }
 }

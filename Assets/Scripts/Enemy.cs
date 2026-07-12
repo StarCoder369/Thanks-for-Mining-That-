@@ -32,6 +32,21 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.Instance.followDecoy)
+        {
+            if (target == null || !target.gameObject.CompareTag("Decoy"))
+            {
+                target = GameObject.FindWithTag("Decoy").transform;
+            }
+        }
+        else
+        {
+            if (target == null || !target.gameObject.CompareTag("Player"))
+            {
+                target = GameObject.FindWithTag("Player").transform;
+            }
+        }
+
         if (target == null)
             return;
 
@@ -60,32 +75,19 @@ public class Enemy : MonoBehaviour
             rb.linearVelocity =
                 rb.linearVelocity.normalized * maxSpeed;
         }
-
-        if (GameManager.Instance.followDecoy)
-        {
-            if (target.gameObject.CompareTag("Player") || target == null)
-            {
-                target = GameObject.FindWithTag("Decoy").transform;
-            }
-        }
-        else
-        {
-            if (target.gameObject.CompareTag("Decoy") || target == null)
-            {
-                target = GameObject.FindWithTag("Player").transform;
-            }
-        }
     }
 
     public void Die()
     {
         StatsManager.Instance.enemiesKilled++;
+        StatsManager.Instance.allEnemiesKilled++;
         GameObject instantiatedExplosion = Instantiate(Explosion, transform.position, Quaternion.identity);
 
         Destroy(instantiatedExplosion, 2f);
         int coinsToAdd = Random.Range(1, 2);
         GameManager.Instance.coins += coinsToAdd;
         StatsManager.Instance.totalCoins += coinsToAdd;
+        StatsManager.Instance.allTotalCoins += coinsToAdd;
         if (normalEnemy)
         {
             GameManager.Instance.normalEnemyPool.ReturnObject(gameObject);
