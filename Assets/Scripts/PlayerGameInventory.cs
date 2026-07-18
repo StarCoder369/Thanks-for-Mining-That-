@@ -183,8 +183,8 @@ public class PlayerGameInventory : MonoBehaviour
         }
         else
         {
-            slot2.sprite = null;
-            slot2.transform.GetChild(0).GetComponent<TMP_Text>().text = "None";
+            slot1.sprite = null;
+            slot1.transform.GetChild(0).GetComponent<TMP_Text>().text = "None";
             toolNames[0].text = "";
         }
 

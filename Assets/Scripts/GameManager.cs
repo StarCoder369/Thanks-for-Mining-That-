@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject statsScreen;
 
+    public AudioSource normalMusic;
+    public AudioSource spaceMusic;
+
     float secondTimer;
 
     private void Awake()
@@ -62,6 +65,8 @@ public class GameManager : MonoBehaviour
         BackToMainMenu();
         coins = StatsManager.Instance.coins;
         runsCompleted = StatsManager.Instance.completedRuns;
+        spaceMusic.enabled = false;
+        normalMusic.enabled = true;
     }
 
     void Update()
@@ -338,6 +343,14 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         StatsManager.Instance.completedRuns++;
+        ShowEndScreen();
+    }
+
+    public void ShowEndScreen()
+    {
+        Debug.Log("Appeared");
+        spaceMusic.enabled = true;
+        normalMusic.enabled = false;
         runsCompleted = StatsManager.Instance.completedRuns;
         statsScreen.SetActive(true);
         StatsManager.Instance.statsScreenAppeared = true;
@@ -345,11 +358,17 @@ public class GameManager : MonoBehaviour
         StatsManager.Instance.UpdateAllRunsFields();
         StatsManager.Instance.UpdateThisRunFields();
         Time.timeScale = 0;
+
     }
 
     public void NewRun()
     {
+        StatsManager.Instance.statsScreenAppeared = false;
         StatsManager.Instance.ResetThisRunFields();
+        StatsManager.Instance.InitializeNewRun();
+
+        StatsManager.Instance.Save();
+
         SceneManager.LoadScene("Game");
     }
 }

@@ -22,6 +22,8 @@ public class ToolData : ScriptableObject
     public List<OreCost> cost;
     public int coinCost;
 
+    public int toolsUnlockedRequired;
+
     public GameObject toolPrefab;
 
     public Sprite icon;

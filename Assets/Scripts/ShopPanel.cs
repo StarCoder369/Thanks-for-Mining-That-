@@ -15,6 +15,7 @@ public class ShopPanel : MonoBehaviour
     public TMP_Text infoCost;
     public Button infoBtn;
     public TMP_Text infoBtnTxt;
+    public TMP_Text requiresAllToolsTxt;
 
     public bool unlocked = false;
     public bool equipped = false;
@@ -78,6 +79,17 @@ public class ShopPanel : MonoBehaviour
         {
             infoBtnTxt.text = "Unlock";
             infoBtn.interactable = true;
+            if (requiresAllToolsTxt != null)
+            {
+                if (tool.toolsUnlockedRequired > 0)
+                {
+                    requiresAllToolsTxt.gameObject.SetActive(true);
+                }
+                else
+                {
+                    requiresAllToolsTxt.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -118,6 +130,22 @@ public class ShopPanel : MonoBehaviour
         }
         else
         {
+            if (tool.toolsUnlockedRequired > 0)
+            {
+                int toolUnlockedCount = 0;
+                for (int i = 0; i < StatsManager.Instance.toolUnlocked.Length; i++)
+                {
+                    if (StatsManager.Instance.toolUnlocked[i] == true)
+                    {
+                        toolUnlockedCount++;
+                    }
+                }
+
+                if (toolUnlockedCount < tool.toolsUnlockedRequired)
+                {
+                    return;
+                }
+            }
             if (GameManager.Instance.coins >= tool.coinCost)
             {
                 GameManager.Instance.coins -= tool.coinCost;

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
   toolName: RepellingOrb
   description: An orb that creates a temporary repelling field
-  amountCrafted: 2
+  amountCrafted: 1
   cooldown: 1
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-    amount: 0
+    amount: 1
   - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-    amount: 0
+    amount: 2
   coinCost: 10
   toolPrefab: {fileID: 1368839506469391705, guid: d0663cf5ab5ab4fb9a45261ce8aff01f, type: 3}
   icon: {fileID: -7312252029852053250, guid: 52bf8adfaf3eb42828693f225cf19bb2, type: 3}

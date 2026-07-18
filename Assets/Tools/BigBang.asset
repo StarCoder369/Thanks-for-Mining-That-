@@ -19,6 +19,7 @@ MonoBehaviour:
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
     amount: 0
-  coinCost: 100
+  coinCost: 0
+  toolsUnlockedRequired: 7
   toolPrefab: {fileID: 3885788937957104656, guid: 4659d661c880747b5a517bc5b8f63aa7, type: 3}
   icon: {fileID: -2703354473452544312, guid: 52bf8adfaf3eb42828693f225cf19bb2, type: 3}

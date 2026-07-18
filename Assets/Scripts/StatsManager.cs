@@ -123,6 +123,14 @@ public class StatsManager : MonoBehaviour
 
     public void Load()
     {
+        if (!PlayerPrefs.HasKey("Initialized"))
+        {
+            InitializeNewRun();
+
+            PlayerPrefs.SetInt("Initialized", 1);
+            Save();
+            return;
+        }
         completedRuns = PlayerPrefs.GetInt(nameof(completedRuns), 0);
 
         allTimeInGame = PlayerPrefs.GetFloat(nameof(allTimeInGame), 0f);
@@ -147,6 +155,11 @@ public class StatsManager : MonoBehaviour
         statsScreenAppeared = PlayerPrefs.GetInt(nameof(statsScreenAppeared), 0) == 1;
 
         LoadShopPanels();
+
+        if (statsScreenAppeared == true)
+        {
+            GameManager.Instance.ShowEndScreen();
+        }
     }
 
     public void UpdateThisRunFields()
@@ -273,5 +286,17 @@ public class StatsManager : MonoBehaviour
         int minutes = Mathf.FloorToInt((seconds % 3600) / 60);
 
         return $"{hours}h {minutes}m";
+    }
+
+    public void InitializeNewRun()
+    {
+        for (int i = 0; i < ToolCount; i++)
+        {
+            toolUnlocked[i] = false;
+            toolEquipped[i] = false;
+        }
+
+        toolUnlocked[0] = true;
+        toolEquipped[0] = true;
     }
 }
