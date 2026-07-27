@@ -194,7 +194,7 @@ public class Asteroid : MonoBehaviour
             Random.Range(minAmountToDrop, maxAmountToDrop)
         );
 
-        int coinsToAdd = Random.Range(1, 2);
+        int coinsToAdd = Random.Range(0, 5);
         GameManager.Instance.coins += coinsToAdd;
         StatsManager.Instance.totalCoins += coinsToAdd;
         StatsManager.Instance.allTotalCoins += coinsToAdd;

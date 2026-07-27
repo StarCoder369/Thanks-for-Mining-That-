@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
         GameObject instantiatedExplosion = Instantiate(Explosion, transform.position, Quaternion.identity);
 
         Destroy(instantiatedExplosion, 2f);
-        int coinsToAdd = Random.Range(1, 2);
+        int coinsToAdd = Random.Range(0, 3);
         GameManager.Instance.coins += coinsToAdd;
         StatsManager.Instance.totalCoins += coinsToAdd;
         StatsManager.Instance.allTotalCoins += coinsToAdd;

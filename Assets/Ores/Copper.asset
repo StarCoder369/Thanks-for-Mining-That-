@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OreData
   oreName: Copper
   oreIcon: {fileID: -6521892155967134998, guid: 4e983147a912945e3a6def265de9f3fc, type: 3}
-  oreDurability: 0.8
+  oreDurability: 0.6

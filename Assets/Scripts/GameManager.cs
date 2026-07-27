@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         runsCompleted = StatsManager.Instance.completedRuns;
         spaceMusic.enabled = false;
         normalMusic.enabled = true;
+        StatsManager.Instance.Save();
     }
 
     void Update()
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
     {
         player.currentHealth = player.maxHealth;
         player.transform.position = Vector3.zero;
+        player.died = false;
         oresStorage.Clear();
         followDecoy = false;
         UpdateResources();
@@ -342,29 +344,40 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        StatsManager.Instance.Save();
+
         StatsManager.Instance.completedRuns++;
+
+        StatsManager.Instance.Save();
+
         ShowEndScreen();
     }
 
     public void ShowEndScreen()
     {
         Debug.Log("Appeared");
+
         spaceMusic.enabled = true;
         normalMusic.enabled = false;
+
         runsCompleted = StatsManager.Instance.completedRuns;
+
         statsScreen.SetActive(true);
+
         StatsManager.Instance.statsScreenAppeared = true;
-        StatsManager.Instance.Save();
+
         StatsManager.Instance.UpdateAllRunsFields();
         StatsManager.Instance.UpdateThisRunFields();
-        Time.timeScale = 0;
 
+        Time.timeScale = 0;
     }
 
     public void NewRun()
     {
         StatsManager.Instance.statsScreenAppeared = false;
+
         StatsManager.Instance.ResetThisRunFields();
+
         StatsManager.Instance.InitializeNewRun();
 
         StatsManager.Instance.Save();

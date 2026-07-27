@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OreData
   oreName: Iron
   oreIcon: {fileID: 6521576048739483930, guid: 4e983147a912945e3a6def265de9f3fc, type: 3}
-  oreDurability: 1.2
+  oreDurability: 1

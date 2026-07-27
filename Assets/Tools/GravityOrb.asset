@@ -18,9 +18,10 @@ MonoBehaviour:
   cooldown: 1
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-    amount: 2
+    amount: 3
   - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-    amount: 1
+    amount: 2
   coinCost: 0
+  toolsUnlockedRequired: 0
   toolPrefab: {fileID: 1368839506469391705, guid: de1b595e49cb74f98909cbcf472758ff, type: 3}
   icon: {fileID: -1184081909042567840, guid: 52bf8adfaf3eb42828693f225cf19bb2, type: 3}

@@ -147,8 +147,8 @@ MonoBehaviour:
   maxHealth: 2
   dmg: 0.5
   rotationOffset: {x: 0, y: 0, z: -90}
-  thrust: 9
-  maxSpeed: 15
+  thrust: 15
+  maxSpeed: 18.5
   turnSpeed: 250
   normalEnemy: 1
 --- !u!50 &1151774494408016608

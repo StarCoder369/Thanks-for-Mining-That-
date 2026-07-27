@@ -71,6 +71,11 @@ public class StatsManager : MonoBehaviour
         Load();
     }
 
+    void OnDisable()
+    {
+        Debug.Log("Disabled");
+    }
+
     private void OnApplicationQuit() => Save();
 
     private void OnApplicationPause(bool paused)
@@ -81,7 +86,7 @@ public class StatsManager : MonoBehaviour
 
     public void Save()
     {
-        int run = GameManager.Instance.runsCompleted + 1;
+        int run = completedRuns + 1;
         string runId = $"_Run{run}";
 
         PlayerPrefs.SetInt(nameof(completedRuns), completedRuns);
@@ -108,7 +113,7 @@ public class StatsManager : MonoBehaviour
         PlayerPrefs.SetInt(nameof(allTotalGoldCount), allTotalGoldCount);
         PlayerPrefs.SetInt(nameof(allTotalToolUsage), allTotalToolUsage);
 
-        PlayerPrefs.SetInt(nameof(coins), coins);
+        PlayerPrefs.SetInt(nameof(coins) + runId, coins);
 
         for (int i = 0; i < ToolCount; i++)
         {
@@ -128,10 +133,29 @@ public class StatsManager : MonoBehaviour
             InitializeNewRun();
 
             PlayerPrefs.SetInt("Initialized", 1);
+
             Save();
+
+            LoadShopPanels();
+
             return;
         }
+
         completedRuns = PlayerPrefs.GetInt(nameof(completedRuns), 0);
+
+        int run = completedRuns + 1;
+        string runId = $"_Run{run}";
+
+        timeInGame = PlayerPrefs.GetFloat(nameof(timeInGame) + runId, 0f);
+
+        enemiesKilled = PlayerPrefs.GetInt(nameof(enemiesKilled) + runId, 0);
+        asteroidsDestroyed = PlayerPrefs.GetInt(nameof(asteroidsDestroyed) + runId, 0);
+        timesDied = PlayerPrefs.GetInt(nameof(timesDied) + runId, 0);
+        totalCoins = PlayerPrefs.GetInt(nameof(totalCoins) + runId, 0);
+        totalCopperCount = PlayerPrefs.GetInt(nameof(totalCopperCount) + runId, 0);
+        totalIronCount = PlayerPrefs.GetInt(nameof(totalIronCount) + runId, 0);
+        totalGoldCount = PlayerPrefs.GetInt(nameof(totalGoldCount) + runId, 0);
+        totalToolUsage = PlayerPrefs.GetInt(nameof(totalToolUsage) + runId, 0);
 
         allTimeInGame = PlayerPrefs.GetFloat(nameof(allTimeInGame), 0f);
 
@@ -144,7 +168,7 @@ public class StatsManager : MonoBehaviour
         allTotalGoldCount = PlayerPrefs.GetInt(nameof(allTotalGoldCount), 0);
         allTotalToolUsage = PlayerPrefs.GetInt(nameof(allTotalToolUsage), 0);
 
-        coins = PlayerPrefs.GetInt(nameof(coins), 0);
+        coins = PlayerPrefs.GetInt(nameof(coins) + runId, 0);
 
         for (int i = 0; i < ToolCount; i++)
         {
@@ -156,7 +180,7 @@ public class StatsManager : MonoBehaviour
 
         LoadShopPanels();
 
-        if (statsScreenAppeared == true)
+        if (statsScreenAppeared)
         {
             GameManager.Instance.ShowEndScreen();
         }
@@ -213,18 +237,24 @@ public class StatsManager : MonoBehaviour
         totalIronCount = 0;
         totalGoldCount = 0;
         totalToolUsage = 0;
+        coins = 0;
 
         statsScreenAppeared = false;
 
-        PlayerPrefs.DeleteKey("TimeInGame");
-        PlayerPrefs.DeleteKey("EnemiesKilled");
-        PlayerPrefs.DeleteKey("AsteroidsDestroyed");
-        PlayerPrefs.DeleteKey("TimesDied");
-        PlayerPrefs.DeleteKey("TotalCoins");
-        PlayerPrefs.DeleteKey("TotalCopperCount");
-        PlayerPrefs.DeleteKey("TotalIronCount");
-        PlayerPrefs.DeleteKey("TotalGoldCount");
-        PlayerPrefs.DeleteKey("TotalToolUsage");
+        int run = completedRuns + 1;
+        string runId = $"_Run{run}";
+
+        PlayerPrefs.DeleteKey(nameof(timeInGame) + runId);
+        PlayerPrefs.DeleteKey(nameof(enemiesKilled) + runId);
+        PlayerPrefs.DeleteKey(nameof(asteroidsDestroyed) + runId);
+        PlayerPrefs.DeleteKey(nameof(timesDied) + runId);
+        PlayerPrefs.DeleteKey(nameof(totalCoins) + runId);
+        PlayerPrefs.DeleteKey(nameof(coins) + runId);
+        PlayerPrefs.DeleteKey(nameof(totalCopperCount) + runId);
+        PlayerPrefs.DeleteKey(nameof(totalIronCount) + runId);
+        PlayerPrefs.DeleteKey(nameof(totalGoldCount) + runId);
+        PlayerPrefs.DeleteKey(nameof(totalToolUsage) + runId);
+
         PlayerPrefs.Save();
     }
 

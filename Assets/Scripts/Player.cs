@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     public float currentHealth;
     public bool movementLocked;
+    public bool died;
 
     private Coroutine knockbackCoroutine;
 
@@ -221,7 +222,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= dmg;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !died)
         {
             Die();
         }
@@ -249,6 +250,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        died = true;
         StatsManager.Instance.timesDied++;
         StatsManager.Instance.allTimesDied++;
         GameManager.Instance.PlayerDie();
@@ -256,7 +258,7 @@ public class Player : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Barrier"))
+        if (other.CompareTag("Boundary"))
         {
             TakeDamage(25);
         }

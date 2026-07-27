@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7efa9149862cc440996fb13ea03a31fa, type: 3}
-  m_Name: BigBang
+  m_Name: BlackHole
   m_EditorClassIdentifier: Assembly-CSharp::ToolData
   toolName: Black Hole
   description: A Black Hole
@@ -18,8 +18,12 @@ MonoBehaviour:
   cooldown: 10000
   cost:
   - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-    amount: 0
-  coinCost: 0
+    amount: 10
+  - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
+    amount: 10
+  - ore: {fileID: 11400000, guid: cb6e081fcf2b94f80b36d43ea75e3446, type: 2}
+    amount: 10
+  coinCost: 500
   toolsUnlockedRequired: 7
   toolPrefab: {fileID: 3885788937957104656, guid: 4659d661c880747b5a517bc5b8f63aa7, type: 3}
   icon: {fileID: -2703354473452544312, guid: 52bf8adfaf3eb42828693f225cf19bb2, type: 3}

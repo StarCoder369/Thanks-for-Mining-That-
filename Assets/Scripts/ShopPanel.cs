@@ -64,6 +64,7 @@ public class ShopPanel : MonoBehaviour
         infoCost.text = unlocked ? "Unlocked" : $"Cost: {tool.coinCost}";
         if (unlocked)
         {
+            requiresAllToolsTxt.gameObject.SetActive(false);
             if (equipped)
             {
                 infoBtnTxt.text = "Equipped";
@@ -81,7 +82,7 @@ public class ShopPanel : MonoBehaviour
             infoBtn.interactable = true;
             if (requiresAllToolsTxt != null)
             {
-                if (tool.toolsUnlockedRequired > 0)
+                if (tool.toolsUnlockedRequired >= 1)
                 {
                     requiresAllToolsTxt.gameObject.SetActive(true);
                 }

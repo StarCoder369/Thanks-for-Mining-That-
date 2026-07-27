@@ -649,8 +649,8 @@ MonoBehaviour:
   allTotalGoldCount: 0
   allTotalToolUsage: 0
   coins: 0
-  toolUnlocked: 0100000000000000
-  toolEquipped: 0100000000000000
+  toolUnlocked: 0000000000000000
+  toolEquipped: 0000000000000000
   statsScreenAppeared: 0
   completedRunsTxt: {fileID: 1178452212}
   hoursPlayedThisRun: {fileID: 901662921}
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 0
@@ -13230,7 +13230,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 1
@@ -45636,7 +45636,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 3
@@ -46958,7 +46958,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 7
@@ -47646,7 +47646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62c20d2362cc84da49cde810093a79d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  maxSpeed: 145
+  maxSpeed: 145.1
   acceleration: 250
   deadZone: 1.5
   maxDistance: 3
@@ -47658,6 +47658,7 @@ MonoBehaviour:
   healthText: {fileID: 1050405326}
   currentHealth: 0
   movementLocked: 0
+  died: 0
 --- !u!50 &985389487
 Rigidbody2D:
   serializedVersion: 5
@@ -49792,7 +49793,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 6
@@ -60963,7 +60964,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 5
@@ -66066,7 +66067,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 4
@@ -69354,7 +69355,7 @@ GameObject:
   - component: {fileID: 1458636596}
   - component: {fileID: 1458636595}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RequiresToolsTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69376,7 +69377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 2.199997, y: 66.1}
+  m_AnchoredPosition: {x: 2.199997, y: 66.09999}
   m_SizeDelta: {x: 266.3, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1458636595
@@ -70528,7 +70529,7 @@ MonoBehaviour:
   - {fileID: 1108485690}
   - {fileID: 559150791}
   spawnChance: 50
-  minSize: 8
+  minSize: 10
   maxSize: 20
   spawnDelay: 15
   maxAsteroids: 75
@@ -70540,14 +70541,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
   - {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
   - {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-  - {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-  - {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
   - {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
   - {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-  - {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-  - {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-  - {fileID: 11400000, guid: cb6e081fcf2b94f80b36d43ea75e3446, type: 2}
-  - {fileID: 11400000, guid: cb6e081fcf2b94f80b36d43ea75e3446, type: 2}
   - {fileID: 11400000, guid: cb6e081fcf2b94f80b36d43ea75e3446, type: 2}
 --- !u!4 &1481807986
 Transform:
@@ -84727,11 +84722,11 @@ MonoBehaviour:
   - {fileID: 1388770774}
   - {fileID: 455608526}
   - {fileID: 1778414980}
-  minSpawnTime: 2
-  maxSpawnTime: 5
-  minBunchSize: 5
-  maxBunchSize: 30
-  spawnRadius: 4
+  minSpawnTime: 1
+  maxSpawnTime: 12
+  minBunchSize: 2
+  maxBunchSize: 40
+  spawnRadius: 7
 --- !u!1001 &1741049135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99247,7 +99242,7 @@ MonoBehaviour:
   infoCost: {fileID: 250411527}
   infoBtn: {fileID: 955192669}
   infoBtnTxt: {fileID: 1250876986}
-  requiresAllToolsTxt: {fileID: 0}
+  requiresAllToolsTxt: {fileID: 1458636595}
   unlocked: 0
   equipped: 0
   index: 2
