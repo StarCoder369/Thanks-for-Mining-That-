@@ -482,8 +482,8 @@ MonoBehaviour:
   minAmountToDrop: 2
   maxAmountToDrop: 5
   playerDmg: 0
-  driftSpeed: 75
-  steeringForce: 0.1
+  driftSpeed: 100
+  steeringForce: 0.2
   randomAngleRange: 75
   asteroid1: 1
   asteroid2: 0

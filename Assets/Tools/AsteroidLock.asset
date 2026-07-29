@@ -17,10 +17,8 @@ MonoBehaviour:
   amountCrafted: 3
   cooldown: 1
   cost:
-  - ore: {fileID: 11400000, guid: 609f6154447b341e193bc610a26abe56, type: 2}
-    amount: 2
   - ore: {fileID: 11400000, guid: b737f61df8b3949de93bf04cde1ea30e, type: 2}
-    amount: 5
+    amount: 3
   coinCost: 150
   toolsUnlockedRequired: 0
   toolPrefab: {fileID: 3885788937957104656, guid: dfde701350ee04064b298b310a400b0b, type: 3}

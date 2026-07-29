@@ -70529,9 +70529,9 @@ MonoBehaviour:
   - {fileID: 1108485690}
   - {fileID: 559150791}
   spawnChance: 50
-  minSize: 10
+  minSize: 8
   maxSize: 20
-  spawnDelay: 15
+  spawnDelay: 10
   maxAsteroids: 75
   minAsteroidSpacing: 15
   asteroidLayer:
@@ -84723,7 +84723,7 @@ MonoBehaviour:
   - {fileID: 455608526}
   - {fileID: 1778414980}
   minSpawnTime: 1
-  maxSpawnTime: 12
+  maxSpawnTime: 7
   minBunchSize: 2
   maxBunchSize: 40
   spawnRadius: 7
