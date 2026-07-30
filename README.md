@@ -23,6 +23,8 @@ You can choose anyway you want. Recommended to use mouse.
 
 **LMB/Space** - Deploy tool
 
+​**1, 2, 3, 4​** - Switch Tools
+
 **Instructions:**
 The point of the game is to unlock and use the **Black Hole**, which is the final tool, as fast as possible. It requires all other tools unlocked and a large amount of coins. It also requires a large amount of resources to craft in-game.
 
